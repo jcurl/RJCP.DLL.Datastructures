@@ -53,6 +53,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="BitOperationsPerfTest.cs" />
+    <Compile Include="BitOperationsTest.cs" />
     <Compile Include="Collections\Generic\NamedItemCollectionTest.cs" />
     <Compile Include="CRCTest.cs" />
     <Compile Include="CRCTestInfo.cs" />

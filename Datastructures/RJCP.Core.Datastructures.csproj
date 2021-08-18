@@ -24,7 +24,7 @@
     <Description>Collection of useful datastructures.</Description>
     <Version>0.2.0</Version>
 
-    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 
     <EnableNETAnalyzers>true</EnableNETAnalyzers>
     <AnalysisMode>Default</AnalysisMode>
@@ -56,6 +56,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Include="BitOperations.cs" />
     <Compile Include="Collections\Generic\NamedItemCollection.cs" />
     <Compile Include="Collections\INamedItem.cs" />
     <Compile Include="CRC16.cs" />
