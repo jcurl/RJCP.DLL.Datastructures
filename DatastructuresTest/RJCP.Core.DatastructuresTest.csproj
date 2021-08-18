@@ -54,6 +54,9 @@
 
   <ItemGroup>
     <Compile Include="Collections\Generic\NamedItemCollectionTest.cs" />
+    <Compile Include="CRCTest.cs" />
+    <Compile Include="CRCTestInfo.cs" />
+    <Compile Include="CRCTestPerf.cs" />
   </ItemGroup>
 
 </Project>
