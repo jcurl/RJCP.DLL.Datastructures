@@ -61,12 +61,29 @@
     <Compile Include="Collections\INamedItem.cs" />
     <Compile Include="CRC16.cs" />
     <Compile Include="CRC32.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="IDeepClonable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Messages.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Messages.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SemVer.cs" />
+    <Compile Include="SemVer2.cs" />
+    <Compile Include="SemVerHelper.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="..\LICENSE.md" Pack="true" PackagePath="\" />
     <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Messages.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Messages.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
