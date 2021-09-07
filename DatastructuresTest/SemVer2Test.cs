@@ -6,11 +6,12 @@
 
     [SuppressMessage("Assertion", "NUnit2010:Use EqualConstraint for better assertion messages in case of failure", Justification = "Direct testing of operators")]
     [SuppressMessage("Assertion", "NUnit2043:Use ComparisonConstraint for better assertion messages in case of failure", Justification = "Direct testing of operators")]
+    [TestFixture]
     public class SemVer2Test
     {
-        [TestCase("0.1.0", 0, 1, 0, TestName = "Ver_0.1.0")]
-        [TestCase("1.0.0", 1, 0, 0, TestName = "Ver_1.0.0")]
-        [TestCase("1.1.2", 1, 1, 2, TestName = "Ver_1.1.2")]
+        [TestCase("0.1.0", 0, 1, 0)]
+        [TestCase("1.0.0", 1, 0, 0)]
+        [TestCase("1.1.2", 1, 1, 2)]
 
         public void BasicSemVer(string version, int major, int minor, int patch)
         {
@@ -25,9 +26,9 @@
             Assert.That(v.HasMetaData, Is.False);
         }
 
-        [TestCase("0.1.0.0", 0, 1, 0, 0, TestName = "Ver_0.1.0.0")]
-        [TestCase("1.0.0.0", 1, 0, 0, 0, TestName = "Ver_1.0.0.0")]
-        [TestCase("1.1.2.234", 1, 1, 2, 234, TestName = "Ver_1.1.2.234")]
+        [TestCase("0.1.0.0", 0, 1, 0, 0)]
+        [TestCase("1.0.0.0", 1, 0, 0, 0)]
+        [TestCase("1.1.2.234", 1, 1, 2, 234)]
         public void SemVerWithBuild(string version, int major, int minor, int patch, int build)
         {
             SemVer2 v = new SemVer2(version);
@@ -42,10 +43,10 @@
             Assert.That(v.HasMetaData, Is.False);
         }
 
-        [TestCase("0.1.0-ci-20150505", 0, 1, 0, "ci-20150505", TestName = "Ver_0.1.0-ci-20150505")]
-        [TestCase("1.0.0-alpha", 1, 0, 0, "alpha", TestName = "Ver_1.0.0-alpha")]
-        [TestCase("1.1.2-beta", 1, 1, 2, "beta", TestName = "Ver_1.1.2-beta")]
-        [TestCase("1.0.123-prex.2", 1, 0, 123, "prex.2", TestName = "Ver_1.0.123-prex.2")]
+        [TestCase("0.1.0-ci-20150505", 0, 1, 0, "ci-20150505")]
+        [TestCase("1.0.0-alpha", 1, 0, 0, "alpha")]
+        [TestCase("1.1.2-beta", 1, 1, 2, "beta")]
+        [TestCase("1.0.123-prex.2", 1, 0, 123, "prex.2")]
         public void SemVerWithPreRelease(string version, int major, int minor, int patch, string preRelease)
         {
             SemVer2 v = new SemVer2(version);
@@ -59,9 +60,9 @@
             Assert.That(v.HasMetaData, Is.False);
         }
 
-        [TestCase("0.1.0.0-ci-20150505", 0, 1, 0, 0, "ci-20150505", TestName = "Ver_0.1.0.0-ci-20150505")]
-        [TestCase("1.0.0.0-alpha", 1, 0, 0, 0, "alpha", TestName = "Ver_1.0.0.0-alpha")]
-        [TestCase("1.1.2.234-beta", 1, 1, 2, 234, "beta", TestName = "Ver_1.1.2.234-beta")]
+        [TestCase("0.1.0.0-ci-20150505", 0, 1, 0, 0, "ci-20150505")]
+        [TestCase("1.0.0.0-alpha", 1, 0, 0, 0, "alpha")]
+        [TestCase("1.1.2.234-beta", 1, 1, 2, 234, "beta")]
         public void SemVerWithBuildPreRelease(string version, int major, int minor, int patch, int build, string preRelease)
         {
             SemVer2 v = new SemVer2(version);
@@ -106,9 +107,9 @@
             Assert.That(v.HasMetaData, Is.True);
         }
 
-        [TestCase("0.1.0+ci-20150505", 0, 1, 0, "ci-20150505", TestName = "Ver_0.1.0+ci-20150505")]
-        [TestCase("1.0.0+alpha", 1, 0, 0, "alpha", TestName = "Ver_1.0.0+alpha")]
-        [TestCase("1.1.2+beta.2", 1, 1, 2, "beta.2", TestName = "Ver_1.1.2+beta.2")]
+        [TestCase("0.1.0+ci-20150505", 0, 1, 0, "ci-20150505")]
+        [TestCase("1.0.0+alpha", 1, 0, 0, "alpha")]
+        [TestCase("1.1.2+beta.2", 1, 1, 2, "beta.2")]
         public void SemVerWithMetaData(string version, int major, int minor, int patch, string metaData)
         {
             SemVer2 v = new SemVer2(version);
@@ -122,9 +123,9 @@
             Assert.That(v.HasMetaData, Is.True);
         }
 
-        [TestCase("0.1.0.0+ci-20150505", 0, 1, 0, 0, "ci-20150505", TestName = "Ver_0.1.0.0+ci-20150505")]
-        [TestCase("1.0.0.0+alpha.a5", 1, 0, 0, 0, "alpha.a5", TestName = "Ver_1.0.0.0+alpha.a5")]
-        [TestCase("1.1.2.234+beta", 1, 1, 2, 234, "beta", TestName = "Ver_1.1.2.234+beta")]
+        [TestCase("0.1.0.0+ci-20150505", 0, 1, 0, 0, "ci-20150505")]
+        [TestCase("1.0.0.0+alpha.a5", 1, 0, 0, 0, "alpha.a5")]
+        [TestCase("1.1.2.234+beta", 1, 1, 2, 234, "beta")]
         public void SemVerWithBuildMetaData(string version, int major, int minor, int patch, int build, string metaData)
         {
             SemVer2 v = new SemVer2(version);
@@ -139,9 +140,9 @@
             Assert.That(v.HasMetaData, Is.True);
         }
 
-        [TestCase("0.1.0.0-ci-20150505+win.7", 0, 1, 0, 0, "ci-20150505", "win.7", TestName = "Ver_0.1.0.0-ci-20150505+win.7")]
-        [TestCase("1.0.0.0-alpha+win.8", 1, 0, 0, 0, "alpha", "win.8", TestName = "Ver_1.0.0.0-alpha+win.8")]
-        [TestCase("1.1.2.234-beta+ubuntu", 1, 1, 2, 234, "beta", "ubuntu", TestName = "Ver_1.1.2.234-beta+ubuntu")]
+        [TestCase("0.1.0.0-ci-20150505+win.7", 0, 1, 0, 0, "ci-20150505", "win.7")]
+        [TestCase("1.0.0.0-alpha+win.8", 1, 0, 0, 0, "alpha", "win.8")]
+        [TestCase("1.1.2.234-beta+ubuntu", 1, 1, 2, 234, "beta", "ubuntu")]
         public void SemVerWithBuildPreReleaseMetaData(string version, int major, int minor, int patch, int build, string preRelease, string metaData)
         {
             SemVer2 v = new SemVer2(version);

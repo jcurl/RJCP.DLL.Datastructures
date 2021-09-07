@@ -6,11 +6,12 @@
 
     [SuppressMessage("Assertion", "NUnit2010:Use EqualConstraint for better assertion messages in case of failure", Justification = "Direct testing of operators")]
     [SuppressMessage("Assertion", "NUnit2043:Use ComparisonConstraint for better assertion messages in case of failure", Justification = "Direct testing of operators")]
+    [TestFixture]
     public class SemVerTest
     {
-        [TestCase("0.1.0", 0, 1, 0, TestName = "Ver_0.1.0")]
-        [TestCase("1.0.0", 1, 0, 0, TestName = "Ver_1.0.0")]
-        [TestCase("1.1.2", 1, 1, 2, TestName = "Ver_1.1.2")]
+        [TestCase("0.1.0", 0, 1, 0)]
+        [TestCase("1.0.0", 1, 0, 0)]
+        [TestCase("1.1.2", 1, 1, 2)]
 
         public void BasicSemVer(string version, int major, int minor, int patch)
         {
@@ -23,9 +24,9 @@
             Assert.That(v.IsPreRelease, Is.False);
         }
 
-        [TestCase("0.1.0.0", 0, 1, 0, 0, TestName = "Ver_0.1.0.0")]
-        [TestCase("1.0.0.0", 1, 0, 0, 0, TestName = "Ver_1.0.0.0")]
-        [TestCase("1.1.2.234", 1, 1, 2, 234, TestName = "Ver_1.1.2.234")]
+        [TestCase("0.1.0.0", 0, 1, 0, 0)]
+        [TestCase("1.0.0.0", 1, 0, 0, 0)]
+        [TestCase("1.1.2.234", 1, 1, 2, 234)]
         public void SemVerWithBuild(string version, int major, int minor, int patch, int build)
         {
             SemVer v = new SemVer(version);
@@ -38,10 +39,10 @@
             Assert.That(v.IsPreRelease, Is.False);
         }
 
-        [TestCase("0.1.0-ci-20150505", 0, 1, 0, "ci-20150505", TestName = "Ver_0.1.0-ci-20150505")]
-        [TestCase("1.0.0-alpha", 1, 0, 0, "alpha", TestName = "Ver_1.0.0-alpha")]
-        [TestCase("1.1.2-beta", 1, 1, 2, "beta", TestName = "Ver_1.1.2-beta")]
-        [TestCase("1.0.123-prex.2", 1, 0, 123, "prex.2", TestName = "Ver_1.0.123-prex.2")]
+        [TestCase("0.1.0-ci-20150505", 0, 1, 0, "ci-20150505")]
+        [TestCase("1.0.0-alpha", 1, 0, 0, "alpha")]
+        [TestCase("1.1.2-beta", 1, 1, 2, "beta")]
+        [TestCase("1.0.123-prex.2", 1, 0, 123, "prex.2")]
         public void SemVerWithPreRelease(string version, int major, int minor, int patch, string preRelease)
         {
             SemVer v = new SemVer(version);
@@ -53,9 +54,9 @@
             Assert.That(v.IsPreRelease, Is.True);
         }
 
-        [TestCase("0.1.0.0-ci-20150505", 0, 1, 0, 0, "ci-20150505", TestName = "Ver_0.1.0.0-ci-20150505")]
-        [TestCase("1.0.0.0-alpha", 1, 0, 0, 0, "alpha", TestName = "Ver_1.0.0.0-alpha")]
-        [TestCase("1.1.2.234-beta", 1, 1, 2, 234, "beta", TestName = "Ver_1.1.2.234-beta")]
+        [TestCase("0.1.0.0-ci-20150505", 0, 1, 0, 0, "ci-20150505")]
+        [TestCase("1.0.0.0-alpha", 1, 0, 0, 0, "alpha")]
+        [TestCase("1.1.2.234-beta", 1, 1, 2, 234, "beta")]
         public void SemVerWithBuildPreRelease(string version, int major, int minor, int patch, int build, string preRelease)
         {
             SemVer v = new SemVer(version);
