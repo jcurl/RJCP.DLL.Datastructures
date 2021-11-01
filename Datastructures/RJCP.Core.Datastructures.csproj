@@ -19,7 +19,7 @@
     <PackageId>RJCP.Core.Datastructures</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageProjectUrl>https://github.com/jcurl</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/jcurl/RJCP.DLL.Datastructures</PackageProjectUrl>
 
     <Description>Collection of useful datastructures.</Description>
     <Version>0.2.0</Version>
