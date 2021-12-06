@@ -3,17 +3,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJCP.Core.Datastructures", "Datastructures\RJCP.Core.Datastructures.csproj", "{AA225483-00E4-4E7A-BFEF-2E280AF551DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Core.Datastructures", "Datastructures\RJCP.Core.Datastructures.csproj", "{AA225483-00E4-4E7A-BFEF-2E280AF551DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RJCP.Core.DatastructuresTest", "DatastructuresTest\RJCP.Core.DatastructuresTest.csproj", "{6C91CDE9-5C0B-4027-AFB5-EEDF12BF9ED9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Core.DatastructuresTest", "DatastructuresTest\RJCP.Core.DatastructuresTest.csproj", "{6C91CDE9-5C0B-4027-AFB5-EEDF12BF9ED9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RJCP.Core.DatastructuresBenchmark", "DatastructuresBenchmark\RJCP.Core.DatastructuresBenchmark.csproj", "{F25DCBD8-C1C0-4354-AC8D-508DD0DB4DFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{AA225483-00E4-4E7A-BFEF-2E280AF551DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -24,5 +23,15 @@ Global
 		{6C91CDE9-5C0B-4027-AFB5-EEDF12BF9ED9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C91CDE9-5C0B-4027-AFB5-EEDF12BF9ED9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C91CDE9-5C0B-4027-AFB5-EEDF12BF9ED9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25DCBD8-C1C0-4354-AC8D-508DD0DB4DFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25DCBD8-C1C0-4354-AC8D-508DD0DB4DFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25DCBD8-C1C0-4354-AC8D-508DD0DB4DFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25DCBD8-C1C0-4354-AC8D-508DD0DB4DFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E8519634-13B0-4161-83EC-C5C298BA7FAC}
 	EndGlobalSection
 EndGlobal

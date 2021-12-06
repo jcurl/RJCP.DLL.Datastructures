@@ -14,7 +14,7 @@
     <RootNamespace>RJCP.Core</RootNamespace>
 
     <Authors>Jason Curl</Authors>
-    <Copyright>(C) 2019-2021, Jason Curl</Copyright>
+    <Copyright>(C) 2013-2021, Jason Curl</Copyright>
     <Company></Company>
     <PackageId>RJCP.Core.Datastructures</PackageId>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
