@@ -1,6 +1,7 @@
 ﻿namespace RJCP.Core
 {
     using System;
+    using System.Runtime.InteropServices;
 
     /// <summary>
     /// Basic numeric type operations.
@@ -865,6 +866,354 @@
         }
         #endregion
 
+#if NETSTANDARD2_1
+        #region Copy Span<byte>
+        /// <summary>
+        /// Copy 16-bit integer after shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy16ShiftLittleEndian(long value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)(value & 0xFF);
+            buffer[1] = (byte)((value >> 8) & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer after shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy16ShiftLittleEndian(int value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)(value & 0xFF);
+            buffer[1] = (byte)((value >> 8) & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer after shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy16ShiftLittleEndian(short value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)(value & 0xFF);
+            buffer[1] = (byte)((value >> 8) & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 32-bit integer after shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy32ShiftLittleEndian(long value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)(value & 0xFF);
+            buffer[1] = (byte)((value >> 8) & 0xFF);
+            buffer[2] = (byte)((value >> 16) & 0xFF);
+            buffer[3] = (byte)((value >> 24) & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 32-bit integer after shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy32ShiftLittleEndian(int value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)(value & 0xFF);
+            buffer[1] = (byte)((value >> 8) & 0xFF);
+            buffer[2] = (byte)((value >> 16) & 0xFF);
+            buffer[3] = (byte)((value >> 24) & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 64-bit integer after shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy64ShiftLittleEndian(long value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)(value & 0xFF);
+            buffer[1] = (byte)((value >> 8) & 0xFF);
+            buffer[2] = (byte)((value >> 16) & 0xFF);
+            buffer[3] = (byte)((value >> 24) & 0xFF);
+            buffer[4] = (byte)((value >> 32) & 0xFF);
+            buffer[5] = (byte)((value >> 40) & 0xFF);
+            buffer[6] = (byte)((value >> 48) & 0xFF);
+            buffer[7] = (byte)((value >> 56) & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy a 32-bit float in little endian format.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy32FloatShiftLittleEndian(float value, Span<byte> buffer)
+        {
+            unsafe {
+                int iValue = *(int*)&value;
+                buffer[0] = (byte)(iValue & 0xFF);
+                buffer[1] = (byte)((iValue >> 8) & 0xFF);
+                buffer[2] = (byte)((iValue >> 16) & 0xFF);
+                buffer[3] = (byte)((iValue >> 24) & 0xFF);
+            }
+        }
+
+        /// <summary>
+        /// Copy a 64-bit float in little endian format.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy64FloatShiftLittleEndian(double value, Span<byte> buffer)
+        {
+            unsafe {
+                long lValue = *(long*)&value;
+                buffer[0] = (byte)(lValue & 0xFF);
+                buffer[1] = (byte)((lValue >> 8) & 0xFF);
+                buffer[2] = (byte)((lValue >> 16) & 0xFF);
+                buffer[3] = (byte)((lValue >> 24) & 0xFF);
+                buffer[4] = (byte)((lValue >> 32) & 0xFF);
+                buffer[5] = (byte)((lValue >> 40) & 0xFF);
+                buffer[6] = (byte)((lValue >> 48) & 0xFF);
+                buffer[7] = (byte)((lValue >> 56) & 0xFF);
+            }
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer after shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy16ShiftBigEndian(long value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)((value >> 8) & 0xFF);
+            buffer[1] = (byte)(value & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer after shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy16ShiftBigEndian(int value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)((value >> 8) & 0xFF);
+            buffer[1] = (byte)(value & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer after shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy16ShiftBigEndian(short value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)((value >> 8) & 0xFF);
+            buffer[1] = (byte)(value & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 32-bit integer after shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy32ShiftBigEndian(long value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)((value >> 24) & 0xFF);
+            buffer[1] = (byte)((value >> 16) & 0xFF);
+            buffer[2] = (byte)((value >> 8) & 0xFF);
+            buffer[3] = (byte)(value & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 32-bit integer after shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy32ShiftBigEndian(int value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)((value >> 24) & 0xFF);
+            buffer[1] = (byte)((value >> 16) & 0xFF);
+            buffer[2] = (byte)((value >> 8) & 0xFF);
+            buffer[3] = (byte)(value & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy 64-bit integer after shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy64ShiftBigEndian(long value, Span<byte> buffer)
+        {
+            buffer[0] = (byte)((value >> 56) & 0xFF);
+            buffer[1] = (byte)((value >> 48) & 0xFF);
+            buffer[2] = (byte)((value >> 40) & 0xFF);
+            buffer[3] = (byte)((value >> 32) & 0xFF);
+            buffer[4] = (byte)((value >> 24) & 0xFF);
+            buffer[5] = (byte)((value >> 16) & 0xFF);
+            buffer[6] = (byte)((value >> 8) & 0xFF);
+            buffer[7] = (byte)(value & 0xFF);
+        }
+
+        /// <summary>
+        /// Copy a 32-bit float in big endian format.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy32FloatShiftBigEndian(float value, Span<byte> buffer)
+        {
+            unsafe {
+                int iValue = *(int*)&value;
+                buffer[0] = (byte)((iValue >> 24) & 0xFF);
+                buffer[1] = (byte)((iValue >> 16) & 0xFF);
+                buffer[2] = (byte)((iValue >> 8) & 0xFF);
+                buffer[3] = (byte)(iValue & 0xFF);
+            }
+        }
+
+        /// <summary>
+        /// Copy a 64-bit float in big endian format.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        public static void Copy64FloatShiftBigEndian(double value, Span<byte> buffer)
+        {
+            unsafe {
+                long lValue = *(long*)&value;
+                buffer[0] = (byte)((lValue >> 56) & 0xFF);
+                buffer[1] = (byte)((lValue >> 48) & 0xFF);
+                buffer[2] = (byte)((lValue >> 40) & 0xFF);
+                buffer[3] = (byte)((lValue >> 32) & 0xFF);
+                buffer[4] = (byte)((lValue >> 24) & 0xFF);
+                buffer[5] = (byte)((lValue >> 16) & 0xFF);
+                buffer[6] = (byte)((lValue >> 8) & 0xFF);
+                buffer[7] = (byte)(lValue & 0xFF);
+            }
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy16Shift(long value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy16ShiftLittleEndian(value, buffer);
+            } else {
+                Copy16ShiftBigEndian(value, buffer);
+            }
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy16Shift(int value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy16ShiftLittleEndian(value, buffer);
+            } else {
+                Copy16ShiftBigEndian(value, buffer);
+            }
+        }
+
+        /// <summary>
+        /// Copy 16-bit integer into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy16Shift(short value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy16ShiftLittleEndian(value, buffer);
+            } else {
+                Copy16ShiftBigEndian(value, buffer);
+            }
+        }
+
+        /// <summary>
+        /// Copy 32-bit integer into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy32Shift(long value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy32ShiftLittleEndian(value, buffer);
+            } else {
+                Copy32ShiftBigEndian(value, buffer);
+            }
+        }
+
+        /// <summary>
+        /// Copy 32-bit integer into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy32Shift(int value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy32ShiftLittleEndian(value, buffer);
+            } else {
+                Copy32ShiftBigEndian(value, buffer);
+            }
+        }
+
+        /// <summary>
+        /// Copy 64-bit integer into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy64Shift(long value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy64ShiftLittleEndian(value, buffer);
+            } else {
+                Copy64ShiftBigEndian(value, buffer);
+            }
+        }
+
+        /// <summary>
+        /// Copy 32-bit float into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy32FloatShift(float value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy32FloatShiftLittleEndian(value, buffer);
+            } else {
+                Copy32FloatShiftBigEndian(value, buffer);
+            }
+        }
+
+        /// <summary>
+        /// Copy 64-bit float into a buffer in the endianness specified.
+        /// </summary>
+        /// <param name="value">The value to be copied.</param>
+        /// <param name="buffer">The destination buffer.</param>
+        /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
+        public static void Copy64FloatShift(double value, Span<byte> buffer, bool littleEndian)
+        {
+            if (littleEndian) {
+                Copy64FloatShiftLittleEndian(value, buffer);
+            } else {
+                Copy64FloatShiftBigEndian(value, buffer);
+            }
+        }
+        #endregion
+#endif
+
         /// <summary>
         /// Convert a byte found at a given position in a buffer to its integer equivalent.
         /// </summary>
@@ -1443,5 +1792,280 @@
             return littleEndian ? To64FloatShiftLittleEndian(buffer, offset) : To64FloatShiftBigEndian(buffer, offset);
         }
         #endregion
+
+#if NETSTANDARD2_1
+        #region Convert by Shifting
+        /// <summary>
+        /// Convert bytes to 16-bit integer by shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static short To16ShiftLittleEndian(ReadOnlySpan<byte> buffer)
+        {
+            ushort value = buffer[0];
+            return unchecked((short)(value | (buffer[1] << 8)));
+        }
+
+        /// <summary>
+        /// Convert bytes to 32-bit integer by shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static int To32ShiftLittleEndian(ReadOnlySpan<byte> buffer)
+        {
+            int value = buffer[0];
+            value |= buffer[1] << 8;
+            value |= buffer[2] << 16;
+            return value | (buffer[3] << 24);
+        }
+
+        /// <summary>
+        /// Convert bytes to 64-bit integer by shifting its bytes in little endian order.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static long To64ShiftLittleEndian(ReadOnlySpan<byte> buffer)
+        {
+            ulong value = buffer[0];
+            value |= (ulong)buffer[1] << 8;
+            value |= (ulong)buffer[2] << 16;
+            value |= (ulong)buffer[3] << 24;
+            value |= (ulong)buffer[4] << 32;
+            value |= (ulong)buffer[5] << 40;
+            value |= (ulong)buffer[6] << 48;
+            value |= (ulong)buffer[7] << 56;
+            return unchecked((long)value);
+        }
+
+        /// <summary>
+        /// Convert bytes to 32-bit float in little endian format.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static float To32FloatShiftLittleEndian(ReadOnlySpan<byte> buffer)
+        {
+            unsafe {
+                uint value = buffer[0];
+                value |= (uint)buffer[1] << 8;
+                value |= (uint)buffer[2] << 16;
+                value |= (uint)buffer[3] << 24;
+                return *(float*)&value;
+            }
+        }
+
+        /// <summary>
+        /// Convert bytes to 64-bit float in little endian format.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static double To64FloatShiftLittleEndian(ReadOnlySpan<byte> buffer)
+        {
+            unsafe {
+                ulong value = buffer[0];
+                value |= (ulong)buffer[1] << 8;
+                value |= (ulong)buffer[2] << 16;
+                value |= (ulong)buffer[3] << 24;
+                value |= (ulong)buffer[4] << 32;
+                value |= (ulong)buffer[5] << 40;
+                value |= (ulong)buffer[6] << 48;
+                value |= (ulong)buffer[7] << 56;
+                return *(double*)&value;
+            }
+        }
+
+        /// <summary>
+        /// Convert bytes to 16-bit integer by shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static short To16ShiftBigEndian(ReadOnlySpan<byte> buffer)
+        {
+            ushort value = (ushort)(buffer[0] << 8);
+            return unchecked((short)(value | (buffer[1])));
+        }
+
+        /// <summary>
+        /// Convert bytes to 32-bit integer by shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static int To32ShiftBigEndian(ReadOnlySpan<byte> buffer)
+        {
+            int value = buffer[0] << 24;
+            value |= buffer[1] << 16;
+            value |= buffer[2] << 8;
+            return value | (buffer[3]);
+        }
+
+        /// <summary>
+        /// Convert bytes to 64-bit integer by shifting its bytes in big endian order.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static long To64ShiftBigEndian(ReadOnlySpan<byte> buffer)
+        {
+            ulong value = (ulong)buffer[0] << 56;
+            value |= (ulong)buffer[1] << 48;
+            value |= (ulong)buffer[2] << 40;
+            value |= (ulong)buffer[3] << 32;
+            value |= (ulong)buffer[4] << 24;
+            value |= (ulong)buffer[5] << 16;
+            value |= (ulong)buffer[6] << 8;
+            value |= buffer[7];
+            return unchecked((long)value);
+        }
+
+        /// <summary>
+        /// Convert bytes to 32-bit float in big endian format.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static float To32FloatShiftBigEndian(ReadOnlySpan<byte> buffer)
+        {
+            unsafe {
+                uint value = (uint)buffer[0] << 24;
+                value |= (uint)buffer[1] << 16;
+                value |= (uint)buffer[2] << 8;
+                value |= buffer[3];
+                return *(float*)&value;
+            }
+        }
+
+        /// <summary>
+        /// Convert bytes to 64-bit float in big endian format.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <returns>The 16-bit value stored in the buffer in little endian at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static double To64FloatShiftBigEndian(ReadOnlySpan<byte> buffer)
+        {
+            unsafe {
+                ulong value = (ulong)buffer[0] << 56;
+                value |= (ulong)buffer[1] << 48;
+                value |= (ulong)buffer[2] << 40;
+                value |= (ulong)buffer[3] << 32;
+                value |= (ulong)buffer[4] << 24;
+                value |= (ulong)buffer[5] << 16;
+                value |= (ulong)buffer[6] << 8;
+                value |= buffer[7];
+                return *(double*)&value;
+            }
+        }
+
+        /// <summary>
+        /// Convert bytes to 16-bit integer by shifting its bytes in the endian order specified.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <param name="littleEndian">
+        /// If <see langword="true"/>, convert from a source format in little endian, else convert from a source format
+        /// in big endian.
+        /// </param>
+        /// <returns>The 16-bit value stored in the buffer at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static short To16Shift(ReadOnlySpan<byte> buffer, bool littleEndian)
+        {
+            return littleEndian ? To16ShiftLittleEndian(buffer) : To16ShiftBigEndian(buffer);
+        }
+
+        /// <summary>
+        /// Convert bytes to 32-bit integer by shifting its bytes in the endian order specified.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <param name="littleEndian">
+        /// If <see langword="true"/>, convert from a source format in little endian, else convert from a source format
+        /// in big endian.
+        /// </param>
+        /// <returns>The 32-bit value stored in the buffer at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static int To32Shift(ReadOnlySpan<byte> buffer, bool littleEndian)
+        {
+            return littleEndian ? To32ShiftLittleEndian(buffer) : To32ShiftBigEndian(buffer);
+        }
+
+        /// <summary>
+        /// Convert bytes to 64-bit integer by shifting its bytes in the endian order specified.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <param name="littleEndian">
+        /// If <see langword="true"/>, convert from a source format in little endian, else convert from a source format
+        /// in big endian.
+        /// </param>
+        /// <returns>The 64-bit value stored in the buffer at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static long To64Shift(ReadOnlySpan<byte> buffer, bool littleEndian)
+        {
+            return littleEndian ? To64ShiftLittleEndian(buffer) : To64ShiftBigEndian(buffer);
+        }
+
+        /// <summary>
+        /// Convert bytes to 32-bit float in the endian order specified.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <param name="littleEndian">
+        /// If <see langword="true"/>, convert from a source format in little endian, else convert from a source format
+        /// in big endian.
+        /// </param>
+        /// <returns>The 32-bit float stored in the buffer at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static float To32FloatShift(ReadOnlySpan<byte> buffer, bool littleEndian)
+        {
+            return littleEndian ? To32FloatShiftLittleEndian(buffer) : To32FloatShiftBigEndian(buffer);
+        }
+
+        /// <summary>
+        /// Convert bytes to 64-bit float in the endian order specified.
+        /// </summary>
+        /// <param name="buffer">The source buffer.</param>
+        /// <param name="littleEndian">
+        /// If <see langword="true"/>, convert from a source format in little endian, else convert from a source format
+        /// in big endian.
+        /// </param>
+        /// <returns>The 64-bit double stored in the buffer at the given offset.</returns>
+        /// <exception cref="IndexOutOfRangeException">
+        /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
+        /// </exception>
+        public static double To64FloatShift(ReadOnlySpan<byte> buffer, bool littleEndian)
+        {
+            return littleEndian ? To64FloatShiftLittleEndian(buffer) : To64FloatShiftBigEndian(buffer);
+        }
+        #endregion
+#endif
     }
 }

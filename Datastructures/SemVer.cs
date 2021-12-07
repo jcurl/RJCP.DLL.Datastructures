@@ -457,7 +457,6 @@ namespace RJCP.Core
         private bool m_HashCodeGenerated;
         private int m_HashCode;
 
-
         /// <summary>
         /// Gets the hash code.
         /// </summary>
