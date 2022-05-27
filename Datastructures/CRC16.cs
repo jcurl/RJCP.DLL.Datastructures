@@ -149,7 +149,6 @@
         /// Perform any final actions on the hashing algorithm.
         /// </summary>
         /// <returns>Get the final CRC.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3358:Ternary operators should not be nested", Justification = "This case is still readable")]
         protected override byte[] HashFinal()
         {
             bool doRefOut = m_RefIn ^ m_RefOut;
@@ -468,7 +467,6 @@
     /// The CCITT MCRF4XX CRC algorithm.
     /// </summary>
     [CLSCompliant(false)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Minor Code Smell", "S101:Types should be named in PascalCase", Justification = "This is the name of the CRC algorithm")]
     public class Crc16CcittMCRF4XX : Crc16
     {
         private static readonly ushort[] PrecomputedTable = {

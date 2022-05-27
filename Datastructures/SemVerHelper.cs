@@ -57,7 +57,11 @@
         {
             int value;
             try {
+#if NETFRAMEWORK
                 value = int.Parse(version.Substring(cursor, length), NumberStyles.None, CultureInfo.InvariantCulture);
+#else
+                value = int.Parse(version.AsSpan(cursor, length), NumberStyles.None, CultureInfo.InvariantCulture);
+#endif
             } catch (FormatException e) {
                 throw new ArgumentException(Messages.Infra_SemVer_InvalidVersion, e);
             } catch (OverflowException e) {
@@ -88,7 +92,11 @@
             int part = version.IndexOf(separator);
             if (part == -1) part = version.Length;
 
+#if NETFRAMEWORK
             value = version.Substring(cursor, part - cursor);
+#else
+            value = version[cursor..part];
+#endif
             cursor = part;
             return value;
         }
@@ -102,7 +110,11 @@
         /// <exception cref="ArgumentException">Illegal character in string.</exception>
         public static string ParseString(string version, ref int cursor)
         {
+#if NETFRAMEWORK
             string value = version.Substring(cursor);
+#else
+            string value = version[cursor..];
+#endif
             cursor = version.Length;
             return value;
         }

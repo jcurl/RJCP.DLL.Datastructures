@@ -149,7 +149,6 @@
         /// Perform any final actions on the hashing algorithm.
         /// </summary>
         /// <returns>Get the final CRC.</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Major Code Smell", "S3358:Ternary operators should not be nested", Justification = "This case is still readable")]
         protected override byte[] HashFinal()
         {
             bool doRefOut = m_RefIn ^ m_RefOut;
