@@ -61,8 +61,11 @@
 
   <ItemGroup>
     <Compile Include="BitOperations.cs" />
+    <Compile Include="Collections\EventEntry.cs" />
     <Compile Include="Collections\Generic\NamedItemCollection.cs" />
+    <Compile Include="Collections\IEvent.cs" />
     <Compile Include="Collections\INamedItem.cs" />
+    <Compile Include="Collections\Specialized\EventLog.cs" />
     <Compile Include="CRC16.cs" />
     <Compile Include="CRC32.cs" />
     <Compile Include="GlobalSuppressions.cs" />

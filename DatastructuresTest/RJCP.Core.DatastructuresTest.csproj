@@ -54,9 +54,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="BitOperationsSpanTest.cs"/>
+    <None Include="BitOperationsSpanTest.cs" />
     <Compile Include="BitOperationsTest.cs" />
     <Compile Include="Collections\Generic\NamedItemCollectionTest.cs" />
+    <Compile Include="Collections\Specialized\EventLogTest.cs" />
     <Compile Include="CRCTest.cs" />
     <Compile Include="CRCTestInfo.cs" />
     <Compile Include="Resources\ResourcesTest.cs" />
