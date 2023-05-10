@@ -23,7 +23,7 @@
         public void Instantiate()
         {
             NamedItems items = new NamedItems();
-            Assert.That(items.Count, Is.EqualTo(0));
+            Assert.That(items, Is.Empty);
             Assert.That(items.IsReadOnly, Is.False);
             Assert.That(items.Name, Is.EqualTo("NamedItem"));
         }
@@ -32,7 +32,7 @@
         public void AddItem()
         {
             NamedItems items = new NamedItems { new NamedItem("one") };
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items, Has.Count.EqualTo(1));
         }
 
         [Test]
@@ -69,20 +69,20 @@
         {
             NamedItem item = new NamedItem("one");
             NamedItems items = new NamedItems() { item };
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items, Has.Count.EqualTo(1));
 
             items.Remove(item);
-            Assert.That(items.Count, Is.EqualTo(0));
+            Assert.That(items, Is.Empty);
         }
 
         [Test]
         public void RemoveNamedItem()
         {
             NamedItems items = new NamedItems { new NamedItem("one") };
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items, Has.Count.EqualTo(1));
 
             items.Remove("one");
-            Assert.That(items.Count, Is.EqualTo(0));
+            Assert.That(items, Is.Empty);
         }
 
         [Test]
@@ -111,7 +111,7 @@
         {
             NamedItems items = new NamedItems { new NamedItem("one") };
             Assert.That(items.Remove("two"), Is.False);
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items, Has.Count.EqualTo(1));
         }
 
         [Test]
@@ -119,7 +119,7 @@
         {
             NamedItems items = new NamedItems { new NamedItem("one") };
             Assert.That(items.Remove(new NamedItem("two")), Is.False);
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items, Has.Count.EqualTo(1));
         }
 
         [Test]
@@ -129,7 +129,7 @@
             // Even though we have an object named "one", we create a different object not in the
             // collection with the same name. That should fail.
             Assert.That(items.Remove(new NamedItem("one")), Is.False);
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items, Has.Count.EqualTo(1));
         }
 
         [Test]
@@ -139,7 +139,7 @@
         {
             NamedItem item = new NamedItem("one");
             NamedItems items = new NamedItems { item };
-            Assert.That(items.Count, Is.EqualTo(1));
+            Assert.That(items, Has.Count.EqualTo(1));
             Assert.That(items.Contains(item), Is.True);
         }
 
@@ -231,9 +231,9 @@
             NamedItem item2 = new NamedItem("two");
             NamedItem item3 = new NamedItem("three");
             NamedItems items = new NamedItems() { item1, item2, item3 };
-            Assert.That(items.Count, Is.EqualTo(3));
+            Assert.That(items, Has.Count.EqualTo(3));
             items.Clear();
-            Assert.That(items.Count, Is.EqualTo(0));
+            Assert.That(items, Is.Empty);
             Assert.That(items.Contains("one"), Is.False);
             Assert.That(items.Contains("two"), Is.False);
             Assert.That(items.Contains("three"), Is.False);

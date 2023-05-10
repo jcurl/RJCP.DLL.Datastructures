@@ -12,7 +12,7 @@
 
             using (Crc32 crc32 = new Crc32Standard()) {
                 byte[] r = crc32.ComputeHash(m, 0, m.Length);
-                Assert.That(r.Length, Is.EqualTo(4));
+                Assert.That(r, Has.Length.EqualTo(4));
                 Assert.That(r[0], Is.EqualTo(0x26));
                 Assert.That(r[1], Is.EqualTo(0x1D));
                 Assert.That(r[2], Is.EqualTo(0xAE));
@@ -23,7 +23,7 @@
             // Check that calculating the CRC without a predetermined table also works
             using (Crc32 crc32 = new Crc32(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true)) {
                 byte[] r = crc32.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(4));
+                Assert.That(r, Has.Length.EqualTo(4));
                 Assert.That(r[0], Is.EqualTo(0x26));
                 Assert.That(r[1], Is.EqualTo(0x1D));
                 Assert.That(r[2], Is.EqualTo(0xAE));
@@ -39,7 +39,7 @@
 
             using (Crc32 crc32 = new Crc32Q()) {
                 byte[] r = crc32.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(4));
+                Assert.That(r, Has.Length.EqualTo(4));
                 Assert.That(r[0], Is.EqualTo(0x30));
                 Assert.That(r[1], Is.EqualTo(0x10));
                 Assert.That(r[2], Is.EqualTo(0xBF));
@@ -55,7 +55,7 @@
 
             using (Crc32 crc32 = new Crc32Posix()) {
                 byte[] r = crc32.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(4));
+                Assert.That(r, Has.Length.EqualTo(4));
                 Assert.That(r[0], Is.EqualTo(0x76));
                 Assert.That(r[1], Is.EqualTo(0x5E));
                 Assert.That(r[2], Is.EqualTo(0x76));
@@ -71,7 +71,7 @@
 
             using (Crc16 crc16 = new Crc16Ibm()) {
                 byte[] r = crc16.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(2));
+                Assert.That(r, Has.Length.EqualTo(2));
                 Assert.That(r[0], Is.EqualTo(0xC5));
                 Assert.That(r[1], Is.EqualTo(0x7A));
                 Assert.That(crc16.Compute(m), Is.EqualTo(0xC57A));
@@ -85,7 +85,7 @@
 
             using (Crc16 crc16 = new Crc16CcittFalse()) {
                 byte[] r = crc16.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(2));
+                Assert.That(r, Has.Length.EqualTo(2));
                 Assert.That(r[0], Is.EqualTo(0x32));
                 Assert.That(r[1], Is.EqualTo(0x18));
                 Assert.That(crc16.Compute(m), Is.EqualTo(0x3218));
@@ -99,7 +99,7 @@
 
             using (Crc16 crc16 = new Crc16CcittKermitLsb()) {
                 byte[] r = crc16.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(2));
+                Assert.That(r, Has.Length.EqualTo(2));
                 Assert.That(r[0], Is.EqualTo(0x6B));
                 Assert.That(r[1], Is.EqualTo(0x28));
                 Assert.That(crc16.Compute(m), Is.EqualTo(0x6B28));
@@ -113,7 +113,7 @@
 
             using (Crc16 crc16 = new Crc16CcittKermit()) {
                 byte[] r = crc16.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(2));
+                Assert.That(r, Has.Length.EqualTo(2));
                 Assert.That(r[0], Is.EqualTo(0x28));
                 Assert.That(r[1], Is.EqualTo(0x6B));
                 Assert.That(crc16.Compute(m), Is.EqualTo(0x286B));
@@ -127,7 +127,7 @@
 
             using (Crc16 crc16 = new Crc16CcittXModem()) {
                 byte[] r = crc16.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(2));
+                Assert.That(r, Has.Length.EqualTo(2));
                 Assert.That(r[0], Is.EqualTo(0xD3));
                 Assert.That(r[1], Is.EqualTo(0x21));
                 Assert.That(crc16.Compute(m), Is.EqualTo(0xD321));
@@ -141,7 +141,7 @@
 
             using (Crc16 crc16 = new Crc16CcittMCRF4XX()) {
                 byte[] r = crc16.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(2));
+                Assert.That(r, Has.Length.EqualTo(2));
                 Assert.That(r[0], Is.EqualTo(0xB4));
                 Assert.That(r[1], Is.EqualTo(0xEC));
                 Assert.That(crc16.Compute(m), Is.EqualTo(0xB4EC));
@@ -155,7 +155,7 @@
 
             using (Crc16 crc16 = new Crc16AugCcitt()) {
                 byte[] r = crc16.ComputeHash(m);
-                Assert.That(r.Length, Is.EqualTo(2));
+                Assert.That(r, Has.Length.EqualTo(2));
                 Assert.That(r[0], Is.EqualTo(0x57));
                 Assert.That(r[1], Is.EqualTo(0xD8));
                 Assert.That(crc16.Compute(m), Is.EqualTo(0x57D8));

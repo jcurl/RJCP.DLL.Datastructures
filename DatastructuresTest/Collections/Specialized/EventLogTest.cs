@@ -4,6 +4,7 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
+    using System.Linq;
     using NUnit.Framework;
 
     [TestFixture]
@@ -77,7 +78,7 @@
         public void Default()
         {
             EventLog<EventData> log = new EventLog<EventData>();
-            Assert.That(log.Count, Is.EqualTo(0));
+            Assert.That(log, Is.Empty);
             Assert.That(log.IsReadOnly, Is.False);
         }
 
@@ -103,12 +104,12 @@
                 break;
             }
 
-            Assert.That(log.Count, Is.EqualTo(1));
+            Assert.That(log, Has.Count.EqualTo(1));
             Assert.That(log[0].Identifier.Description, Is.EqualTo("Warning"));
             Assert.That(log[0].Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[0].TimeStamp, Is.GreaterThanOrEqualTo(start));
 
-            Assert.That(notify.Count, Is.EqualTo(1));
+            Assert.That(notify, Has.Count.EqualTo(1));
             Assert.That(notify[0].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[0].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[0].NewStartingIndex, Is.EqualTo(0));
@@ -140,7 +141,7 @@
                 break;
             }
 
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
             Assert.That(log[0].Identifier.Description, Is.EqualTo("Warning"));
             Assert.That(log[0].Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[0].TimeStamp, Is.GreaterThanOrEqualTo(start));
@@ -149,17 +150,17 @@
             Assert.That(log[1].Identifier.Severity, Is.EqualTo(EventSeverity.Information));
             Assert.That(log[1].TimeStamp, Is.GreaterThanOrEqualTo(log[0].TimeStamp));
 
-            Assert.That(notify.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
             Assert.That(notify[0].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[0].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[0].NewStartingIndex, Is.EqualTo(0));
             Assert.That(notify[0].OldItems, Is.Null);
-            Assert.That(notify[0].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[0].NewItems, Has.Count.EqualTo(1));
             Assert.That(notify[1].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[1].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[1].NewStartingIndex, Is.EqualTo(1));
             Assert.That(notify[1].OldItems, Is.Null);
-            Assert.That(notify[1].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[1].NewItems, Has.Count.EqualTo(1));
 
             Assert.That(log.Max.Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
         }
@@ -188,7 +189,7 @@
                 break;
             }
 
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
             Assert.That(log[0].Identifier.Description, Is.EqualTo("Warning 1"));
             Assert.That(log[0].Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[0].TimeStamp, Is.GreaterThanOrEqualTo(start));
@@ -197,17 +198,17 @@
             Assert.That(log[1].Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[1].TimeStamp, Is.GreaterThanOrEqualTo(log[0].TimeStamp));
 
-            Assert.That(notify.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
             Assert.That(notify[0].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[0].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[0].NewStartingIndex, Is.EqualTo(0));
             Assert.That(notify[0].OldItems, Is.Null);
-            Assert.That(notify[0].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[0].NewItems, Has.Count.EqualTo(1));
             Assert.That(notify[1].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[1].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[1].NewStartingIndex, Is.EqualTo(1));
             Assert.That(notify[1].OldItems, Is.Null);
-            Assert.That(notify[1].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[1].NewItems, Has.Count.EqualTo(1));
 
             Assert.That(log.Max.Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log.Max.Identifier.Description, Is.EqualTo("Warning 1"));
@@ -239,7 +240,7 @@
                 break;
             }
 
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
             Assert.That(log[0].Identifier.Description, Is.EqualTo("Warning"));
             Assert.That(log[0].Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[0].TimeStamp, Is.GreaterThanOrEqualTo(start));
@@ -248,17 +249,17 @@
             Assert.That(log[1].Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[1].TimeStamp, Is.GreaterThanOrEqualTo(log[0].TimeStamp));
 
-            Assert.That(notify.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
             Assert.That(notify[0].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[0].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[0].NewStartingIndex, Is.EqualTo(0));
             Assert.That(notify[0].OldItems, Is.Null);
-            Assert.That(notify[0].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[0].NewItems, Has.Count.EqualTo(1));
             Assert.That(notify[1].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[1].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[1].NewStartingIndex, Is.EqualTo(1));
             Assert.That(notify[1].OldItems, Is.Null);
-            Assert.That(notify[1].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[1].NewItems, Has.Count.EqualTo(1));
 
             Assert.That(log.Max.Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
         }
@@ -278,12 +279,12 @@
                 log.Insert(0, EventData.Get(EventSeverity.Information, "Info"));
             }, Throws.TypeOf<NotSupportedException>());
 
-            Assert.That(log.Count, Is.EqualTo(1));
+            Assert.That(log, Has.Count.EqualTo(1));
             Assert.That(log[0].Identifier.Description, Is.EqualTo("Warning"));
             Assert.That(log[0].Identifier.Severity, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[0].TimeStamp, Is.GreaterThanOrEqualTo(start));
 
-            Assert.That(notify.Count, Is.EqualTo(1));
+            Assert.That(notify, Has.Count.EqualTo(1));
             Assert.That(notify[0].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[0].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[0].NewStartingIndex, Is.EqualTo(0));
@@ -313,24 +314,24 @@
                 break;
             }
 
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
             Assert.That(log[0].Identifier, Is.EqualTo(EventSeverity.Warning));
             Assert.That(log[0].TimeStamp, Is.GreaterThanOrEqualTo(start));
 
             Assert.That(log[1].Identifier, Is.EqualTo(EventSeverity.Information));
             Assert.That(log[1].TimeStamp, Is.GreaterThanOrEqualTo(log[0].TimeStamp));
 
-            Assert.That(notify.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
             Assert.That(notify[0].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[0].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[0].NewStartingIndex, Is.EqualTo(0));
             Assert.That(notify[0].OldItems, Is.Null);
-            Assert.That(notify[0].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[0].NewItems, Has.Count.EqualTo(1));
             Assert.That(notify[1].Action, Is.EqualTo(NotifyCollectionChangedAction.Add));
             Assert.That(notify[1].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[1].NewStartingIndex, Is.EqualTo(1));
             Assert.That(notify[1].OldItems, Is.Null);
-            Assert.That(notify[1].NewItems.Count, Is.EqualTo(1));
+            Assert.That(notify[1].NewItems, Has.Count.EqualTo(1));
 
             // Type T doesn't implement IComparable<T>.
             Assert.That(log.Max, Is.Null);
@@ -404,10 +405,10 @@
             log.Add(e1);
             log.Add(e2);
 
-            Assert.That(log.Contains(e1), Is.True);
-            Assert.That(log.Contains(e2), Is.True);
-            Assert.That(log.Contains(e3), Is.False); // It doesn't implement IEquatable
-            Assert.That(log.Contains(e4), Is.False);
+            Assert.That(log, Does.Contain(e1));
+            Assert.That(log, Does.Contain(e2));
+            Assert.That(log, Does.Not.Contain(e3)); // It doesn't implement IEquatable
+            Assert.That(log, Does.Not.Contain(e4));
         }
 
         [Test]
@@ -421,20 +422,20 @@
             log.Add(EventData.Get(EventSeverity.Warning, "Warning 1"));
             log.Add(EventData.Get(EventSeverity.Warning, "Warning 2"));
 
-            Assert.That(notify.Count, Is.EqualTo(2));
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
 
             Assert.That(() => {
                 log.RemoveAt(0);
             }, Throws.TypeOf<NotSupportedException>());
-            Assert.That(notify.Count, Is.EqualTo(2));
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
 
             Assert.That(() => {
                 log.RemoveAt(1);
             }, Throws.TypeOf<NotSupportedException>());
-            Assert.That(notify.Count, Is.EqualTo(2));
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
         }
 
         [Test]
@@ -450,20 +451,20 @@
             log.Add(e1);
             log.Add(e2);
 
-            Assert.That(notify.Count, Is.EqualTo(2));
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
 
             Assert.That(() => {
                 log.Remove(e2);
             }, Throws.TypeOf<NotSupportedException>());
-            Assert.That(notify.Count, Is.EqualTo(2));
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
 
             Assert.That(() => {
                 log.Remove(e1);
             }, Throws.TypeOf<NotSupportedException>());
-            Assert.That(notify.Count, Is.EqualTo(2));
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
         }
 
         [Test]
@@ -477,18 +478,18 @@
             log.Add(EventData.Get(EventSeverity.Warning, "Warning 1"));
             log.Add(EventData.Get(EventSeverity.Warning, "Warning 2"));
 
-            Assert.That(notify.Count, Is.EqualTo(2));
-            Assert.That(log.Count, Is.EqualTo(2));
+            Assert.That(notify, Has.Count.EqualTo(2));
+            Assert.That(log, Has.Count.EqualTo(2));
             Assert.That(log.Max.Identifier.Description, Is.EqualTo("Warning 1"));
 
             log.Clear();
-            Assert.That(notify.Count, Is.EqualTo(3));
+            Assert.That(notify, Has.Count.EqualTo(3));
             Assert.That(notify[2].Action, Is.EqualTo(NotifyCollectionChangedAction.Reset));
             Assert.That(notify[2].OldStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[2].OldItems, Is.Null);
             Assert.That(notify[2].NewStartingIndex, Is.EqualTo(-1));
             Assert.That(notify[2].NewItems, Is.Null);
-            Assert.That(log.Count, Is.EqualTo(0));
+            Assert.That(log, Is.Empty);
         }
 
         [Test]
@@ -503,7 +504,7 @@
             log.CopyTo(list, 0);
 
             int i = 0;
-            foreach (EventEntry<EventSeverity> entry in log) {
+            foreach (EventEntry<EventSeverity> entry in log.Cast<EventEntry<EventSeverity>>()) {
                 Assert.That(list[i].Identifier, Is.EqualTo(entry.Identifier));
                 Assert.That(list[i].TimeStamp, Is.EqualTo(entry.TimeStamp));
                 i++;
