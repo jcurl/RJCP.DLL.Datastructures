@@ -3,7 +3,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40;netstandard2.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;netstandard2.1</TargetFrameworks>
     <OutputType>Library</OutputType>
     <Configurations>Debug;Release</Configurations>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -76,6 +76,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Messages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Result.cs" />
     <Compile Include="SemVer.cs" />
     <Compile Include="SemVer2.cs" />
     <Compile Include="SemVerHelper.cs" />

@@ -3,7 +3,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40;netcoreapp3.1</TargetFrameworks>
+    <TargetFrameworks>net40;net45;netcoreapp3.1</TargetFrameworks>
     <OutputType>Library</OutputType>
     <IsPackable>false</IsPackable>
     <Configurations>Debug;Release</Configurations>
@@ -61,6 +61,7 @@
     <Compile Include="CRCTest.cs" />
     <Compile Include="CRCTestInfo.cs" />
     <Compile Include="Resources\ResourcesTest.cs" />
+    <Compile Include="ResultTest.cs" />
     <Compile Include="SemVer2Test.cs" />
     <Compile Include="SemVerTest.cs" />
   </ItemGroup>
