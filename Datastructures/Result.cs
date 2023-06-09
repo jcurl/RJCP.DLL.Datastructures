@@ -167,6 +167,8 @@
         /// Extracts actual result.
         /// </summary>
         /// <param name="result">The result object.</param>
+        /// <returns>The value contained within the result.</returns>
+        /// <exception cref="Exception">This result is not successful.</exception>
         public static explicit operator T(Result<T> result)
         {
             return result.Value;
