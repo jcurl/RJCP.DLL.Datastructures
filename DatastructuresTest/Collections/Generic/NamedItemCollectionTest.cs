@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using NUnit.Framework;
 
-    [TestFixture(Category = "Collections.NamedItemCollection")]
+    [TestFixture]
     public class NamedItemCollectionTest
     {
         private class NamedItem : INamedItem
