@@ -1,7 +1,10 @@
 ﻿namespace RJCP.Core
 {
     using System;
+
+#if NETSTANDARD2_1 || NET462_OR_GREATER
     using System.Runtime.CompilerServices;
+#endif
 
     /// <summary>
     /// Basic numeric type operations.
@@ -44,7 +47,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy8Simple(long value, byte[] buffer, int offset)
@@ -58,7 +61,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy8Simple(int value, byte[] buffer, int offset)
@@ -72,7 +75,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy8Simple(short value, byte[] buffer, int offset)
@@ -86,7 +89,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy8Simple(byte value, byte[] buffer, int offset)
@@ -104,7 +107,7 @@
         /// The corresponding CLS compliant implementation is <see cref="Copy8Simple(byte, byte[], int)"/>.
         /// </remarks>
         [CLSCompliant(false)]
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy8Simple(sbyte value, byte[] buffer, int offset)
@@ -128,8 +131,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(short)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy16Pointer(long value, byte[] buffer, int offset)
@@ -154,8 +162,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(short)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy16Pointer(int value, byte[] buffer, int offset)
@@ -180,8 +193,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(short)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy16Pointer(short value, byte[] buffer, int offset)
@@ -206,8 +224,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(int)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy32Pointer(long value, byte[] buffer, int offset)
@@ -232,8 +255,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(int)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy32Pointer(int value, byte[] buffer, int offset)
@@ -258,8 +286,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(long)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy64Pointer(long value, byte[] buffer, int offset)
@@ -284,8 +317,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(float)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy32FloatPointer(float value, byte[] buffer, int offset)
@@ -310,8 +348,13 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.GetBytes(double)"/> as an alternative which does more
+        /// checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy64FloatPointer(double value, byte[] buffer, int offset)
@@ -338,8 +381,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy16PointerSwap(long value, byte[] buffer, int offset)
@@ -366,8 +413,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy16PointerSwap(int value, byte[] buffer, int offset)
@@ -394,8 +445,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy16PointerSwap(short value, byte[] buffer, int offset)
@@ -422,8 +477,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy32PointerSwap(long value, byte[] buffer, int offset)
@@ -451,8 +510,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy32PointerSwap(int value, byte[] buffer, int offset)
@@ -482,8 +545,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy64PointerSwap(long value, byte[] buffer, int offset)
@@ -514,8 +581,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy32FloatPointerSwap(float value, byte[] buffer, int offset)
@@ -543,8 +614,12 @@
         /// If you attempt to write out of the bounds of <paramref name="buffer"/> with <paramref name="offset"/>, no
         /// exception is likely to be raised by the run-time, and latent memory corruption can occur.
         /// </para>
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static void DangerousCopy64FloatPointerSwap(double value, byte[] buffer, int offset)
@@ -566,7 +641,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16ShiftLittleEndian(long value, byte[] buffer, int offset)
@@ -581,7 +656,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16ShiftLittleEndian(int value, byte[] buffer, int offset)
@@ -596,7 +671,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16ShiftLittleEndian(short value, byte[] buffer, int offset)
@@ -611,7 +686,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32ShiftLittleEndian(long value, byte[] buffer, int offset)
@@ -628,7 +703,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32ShiftLittleEndian(int value, byte[] buffer, int offset)
@@ -645,7 +720,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy64ShiftLittleEndian(long value, byte[] buffer, int offset)
@@ -666,7 +741,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32FloatShiftLittleEndian(float value, byte[] buffer, int offset)
@@ -686,7 +761,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy64FloatShiftLittleEndian(double value, byte[] buffer, int offset)
@@ -710,7 +785,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16ShiftBigEndian(long value, byte[] buffer, int offset)
@@ -725,7 +800,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16ShiftBigEndian(int value, byte[] buffer, int offset)
@@ -740,7 +815,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16ShiftBigEndian(short value, byte[] buffer, int offset)
@@ -755,7 +830,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32ShiftBigEndian(long value, byte[] buffer, int offset)
@@ -772,7 +847,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32ShiftBigEndian(int value, byte[] buffer, int offset)
@@ -789,7 +864,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy64ShiftBigEndian(long value, byte[] buffer, int offset)
@@ -810,7 +885,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32FloatShiftBigEndian(float value, byte[] buffer, int offset)
@@ -830,7 +905,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy64FloatShiftBigEndian(double value, byte[] buffer, int offset)
@@ -855,7 +930,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16Shift(long value, byte[] buffer, int offset, bool littleEndian)
@@ -874,7 +949,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16Shift(int value, byte[] buffer, int offset, bool littleEndian)
@@ -893,7 +968,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy16Shift(short value, byte[] buffer, int offset, bool littleEndian)
@@ -912,7 +987,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32Shift(long value, byte[] buffer, int offset, bool littleEndian)
@@ -931,7 +1006,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32Shift(int value, byte[] buffer, int offset, bool littleEndian)
@@ -950,7 +1025,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy64Shift(long value, byte[] buffer, int offset, bool littleEndian)
@@ -969,7 +1044,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy32FloatShift(float value, byte[] buffer, int offset, bool littleEndian)
@@ -988,7 +1063,7 @@
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="offset">The offset in the destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static void Copy64FloatShift(double value, byte[] buffer, int offset, bool littleEndian)
@@ -1008,9 +1083,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16ShiftLittleEndian(long value, Span<byte> buffer)
         {
             buffer[0] = (byte)(value & 0xFF);
@@ -1022,9 +1095,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16ShiftLittleEndian(int value, Span<byte> buffer)
         {
             buffer[0] = (byte)(value & 0xFF);
@@ -1036,9 +1107,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16ShiftLittleEndian(short value, Span<byte> buffer)
         {
             buffer[0] = (byte)(value & 0xFF);
@@ -1050,9 +1119,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32ShiftLittleEndian(long value, Span<byte> buffer)
         {
             buffer[0] = (byte)(value & 0xFF);
@@ -1066,9 +1133,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32ShiftLittleEndian(int value, Span<byte> buffer)
         {
             buffer[0] = (byte)(value & 0xFF);
@@ -1082,9 +1147,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy64ShiftLittleEndian(long value, Span<byte> buffer)
         {
             buffer[0] = (byte)(value & 0xFF);
@@ -1102,9 +1165,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32FloatShiftLittleEndian(float value, Span<byte> buffer)
         {
             unsafe {
@@ -1121,9 +1182,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy64FloatShiftLittleEndian(double value, Span<byte> buffer)
         {
             unsafe {
@@ -1144,9 +1203,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16ShiftBigEndian(long value, Span<byte> buffer)
         {
             buffer[0] = (byte)((value >> 8) & 0xFF);
@@ -1158,9 +1215,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16ShiftBigEndian(int value, Span<byte> buffer)
         {
             buffer[0] = (byte)((value >> 8) & 0xFF);
@@ -1172,9 +1227,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16ShiftBigEndian(short value, Span<byte> buffer)
         {
             buffer[0] = (byte)((value >> 8) & 0xFF);
@@ -1186,9 +1239,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32ShiftBigEndian(long value, Span<byte> buffer)
         {
             buffer[0] = (byte)((value >> 24) & 0xFF);
@@ -1202,9 +1253,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32ShiftBigEndian(int value, Span<byte> buffer)
         {
             buffer[0] = (byte)((value >> 24) & 0xFF);
@@ -1218,9 +1267,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy64ShiftBigEndian(long value, Span<byte> buffer)
         {
             buffer[0] = (byte)((value >> 56) & 0xFF);
@@ -1238,9 +1285,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32FloatShiftBigEndian(float value, Span<byte> buffer)
         {
             unsafe {
@@ -1257,9 +1302,7 @@
         /// </summary>
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy64FloatShiftBigEndian(double value, Span<byte> buffer)
         {
             unsafe {
@@ -1281,9 +1324,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16Shift(long value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1299,9 +1340,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16Shift(int value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1317,9 +1356,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy16Shift(short value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1335,9 +1372,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32Shift(long value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1353,9 +1388,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32Shift(int value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1371,9 +1404,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy64Shift(long value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1389,9 +1420,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy32FloatShift(float value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1407,9 +1436,7 @@
         /// <param name="value">The value to be copied.</param>
         /// <param name="buffer">The destination buffer.</param>
         /// <param name="littleEndian">If <see langword="true"/>, copy as little endian, else big endian.</param>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static void Copy64FloatShift(double value, Span<byte> buffer, bool littleEndian)
         {
             if (littleEndian) {
@@ -1427,7 +1454,7 @@
         /// <param name="buffer">The source buffer.</param>
         /// <param name="offset">The offset in the source buffer.</param>
         /// <returns>The value stored in the buffer at the given offset.</returns>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static long To8Simple(byte[] buffer, int offset)
@@ -1451,8 +1478,13 @@
         /// of 2 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another conversion function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.ToInt16(byte[], int)"/> as an alternative which does
+        /// more checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static short DangerousTo16Pointer(byte[] buffer, int offset)
@@ -1477,8 +1509,13 @@
         /// of 4 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another conversion function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.ToInt32(byte[], int)"/> as an alternative which does
+        /// more checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static int DangerousTo32Pointer(byte[] buffer, int offset)
@@ -1503,8 +1540,13 @@
         /// of 8 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another conversion function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.ToInt64(byte[], int)"/> as an alternative which does
+        /// more checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static long DangerousTo64Pointer(byte[] buffer, int offset)
@@ -1529,8 +1571,13 @@
         /// of 4 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another conversion function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.ToSingle(byte[], int)"/> as an alternative which does
+        /// more checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static float DangerousTo32FloatPointer(byte[] buffer, int offset)
@@ -1555,8 +1602,13 @@
         /// of 8 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another conversion function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done. See instead <see cref="BitConverter.ToDouble(byte[], int)"/> as an alternative which does
+        /// more checking.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static double DangerousTo64FloatPointer(byte[] buffer, int offset)
@@ -1585,8 +1637,12 @@
         /// of 2 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another copy function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 2 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static short DangerousTo16PointerSwap(byte[] buffer, int offset)
@@ -1616,8 +1672,12 @@
         /// of 4 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another copy function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static int DangerousTo32PointerSwap(byte[] buffer, int offset)
@@ -1649,8 +1709,12 @@
         /// of 8 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another copy function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static long DangerousTo64PointerSwap(byte[] buffer, int offset)
@@ -1683,8 +1747,12 @@
         /// of 4 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another copy function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 4 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static float DangerousTo32FloatPointerSwap(byte[] buffer, int offset)
@@ -1714,8 +1782,12 @@
         /// of 8 bytes is within the buffer array provided. No checks are made by this function, and may result in an
         /// incorrect conversion. It is only provided for advanced programming with high performance. Consider using
         /// another copy function instead.
+        /// <para>
+        /// Before calling this method, you should ensure that <c>buffer[offset]</c> is aligned to 8 bytes. No alignment
+        /// checking is done.
+        /// </para>
         /// </remarks>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public unsafe static double DangerousTo64FloatPointerSwap(byte[] buffer, int offset)
@@ -1741,7 +1813,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static short To16ShiftLittleEndian(byte[] buffer, int offset)
@@ -1760,7 +1832,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static int To32ShiftLittleEndian(byte[] buffer, int offset)
@@ -1781,7 +1853,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static long To64ShiftLittleEndian(byte[] buffer, int offset)
@@ -1807,7 +1879,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static float To32FloatShiftLittleEndian(byte[] buffer, int offset)
@@ -1831,7 +1903,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static double To64FloatShiftLittleEndian(byte[] buffer, int offset)
@@ -1859,7 +1931,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static short To16ShiftBigEndian(byte[] buffer, int offset)
@@ -1878,7 +1950,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static int To32ShiftBigEndian(byte[] buffer, int offset)
@@ -1899,7 +1971,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static long To64ShiftBigEndian(byte[] buffer, int offset)
@@ -1925,7 +1997,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static float To32FloatShiftBigEndian(byte[] buffer, int offset)
@@ -1949,7 +2021,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static double To64FloatShiftBigEndian(byte[] buffer, int offset)
@@ -1981,7 +2053,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static short To16Shift(byte[] buffer, int offset, bool littleEndian)
@@ -2003,7 +2075,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static int To32Shift(byte[] buffer, int offset, bool littleEndian)
@@ -2025,7 +2097,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static long To64Shift(byte[] buffer, int offset, bool littleEndian)
@@ -2047,7 +2119,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static float To32FloatShift(byte[] buffer, int offset, bool littleEndian)
@@ -2069,7 +2141,7 @@
         /// An attempt to access the <paramref name="buffer"/> with an <paramref name="offset"/> outside its bounds, has
         /// been made.
         /// </exception>
-#if NETSTANDARD2_1
+#if NETSTANDARD2_1 || NET462_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         public static double To64FloatShift(byte[] buffer, int offset, bool littleEndian)
@@ -2088,9 +2160,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static short To16ShiftLittleEndian(ReadOnlySpan<byte> buffer)
         {
             ushort value = buffer[0];
@@ -2105,9 +2175,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static int To32ShiftLittleEndian(ReadOnlySpan<byte> buffer)
         {
             int value = buffer[0];
@@ -2124,9 +2192,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static long To64ShiftLittleEndian(ReadOnlySpan<byte> buffer)
         {
             ulong value = buffer[0];
@@ -2148,9 +2214,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static float To32FloatShiftLittleEndian(ReadOnlySpan<byte> buffer)
         {
             unsafe {
@@ -2170,9 +2234,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static double To64FloatShiftLittleEndian(ReadOnlySpan<byte> buffer)
         {
             unsafe {
@@ -2196,9 +2258,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static short To16ShiftBigEndian(ReadOnlySpan<byte> buffer)
         {
             ushort value = (ushort)(buffer[0] << 8);
@@ -2213,9 +2273,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static int To32ShiftBigEndian(ReadOnlySpan<byte> buffer)
         {
             int value = buffer[0] << 24;
@@ -2232,9 +2290,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static long To64ShiftBigEndian(ReadOnlySpan<byte> buffer)
         {
             ulong value = (ulong)buffer[0] << 56;
@@ -2256,9 +2312,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static float To32FloatShiftBigEndian(ReadOnlySpan<byte> buffer)
         {
             unsafe {
@@ -2278,9 +2332,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static double To64FloatShiftBigEndian(ReadOnlySpan<byte> buffer)
         {
             unsafe {
@@ -2308,9 +2360,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static short To16Shift(ReadOnlySpan<byte> buffer, bool littleEndian)
         {
             return littleEndian ? To16ShiftLittleEndian(buffer) : To16ShiftBigEndian(buffer);
@@ -2328,9 +2378,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static int To32Shift(ReadOnlySpan<byte> buffer, bool littleEndian)
         {
             return littleEndian ? To32ShiftLittleEndian(buffer) : To32ShiftBigEndian(buffer);
@@ -2348,9 +2396,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static long To64Shift(ReadOnlySpan<byte> buffer, bool littleEndian)
         {
             return littleEndian ? To64ShiftLittleEndian(buffer) : To64ShiftBigEndian(buffer);
@@ -2368,9 +2414,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static float To32FloatShift(ReadOnlySpan<byte> buffer, bool littleEndian)
         {
             return littleEndian ? To32FloatShiftLittleEndian(buffer) : To32FloatShiftBigEndian(buffer);
@@ -2388,9 +2432,7 @@
         /// <exception cref="IndexOutOfRangeException">
         /// An attempt to access the <paramref name="buffer"/> outside its bounds has been made.
         /// </exception>
-#if NETSTANDARD2_1
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-#endif
         public static double To64FloatShift(ReadOnlySpan<byte> buffer, bool littleEndian)
         {
             return littleEndian ? To64FloatShiftLittleEndian(buffer) : To64FloatShiftBigEndian(buffer);
