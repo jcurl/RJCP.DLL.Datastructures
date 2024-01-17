@@ -1,4 +1,4 @@
-﻿namespace RJCP.IO
+﻿namespace RJCP.Core
 {
     using BenchmarkDotNet.Running;
 
