@@ -276,6 +276,8 @@ namespace RJCP.Core
             return true;
         }
 
+        private static readonly char[] PatchSep = new char[] { '-', '.' };
+
         private void InternalParseSemVer(string version)
         {
             bool build = false;
@@ -293,7 +295,7 @@ namespace RJCP.Core
             if (cursor >= length) throw new ArgumentException(Messages.Infra_SemVer_InvalidVersion);
             cursor++;
 
-            m_Patch = SemVerHelper.ParseNumber(version, ref cursor, new char[] { '-', '.' }, false);
+            m_Patch = SemVerHelper.ParseNumber(version, ref cursor, PatchSep, false);
             if (cursor < length) {
                 switch (version[cursor]) {
                 case '.':
