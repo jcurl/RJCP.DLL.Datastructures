@@ -96,7 +96,7 @@ namespace RJCP.Core
         [Benchmark]
         public void Copy64FloatShift() => BitOperations.Copy64FloatShift(3.14159265359, m_Buffer, 0, true);
 
-#if NETCOREAPP3_1_OR_GREATER
+#if NET6_0_OR_GREATER
         [Benchmark]
         public void Copy16ShiftLESpan() => BitOperations.Copy16ShiftLittleEndian((short)0x1234, m_Buffer);
 

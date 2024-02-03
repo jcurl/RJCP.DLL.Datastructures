@@ -3,7 +3,7 @@
     using System;
     using System.Runtime.CompilerServices;
 
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
     using System.Runtime.ExceptionServices;
 #endif
 
@@ -54,7 +54,7 @@
     public readonly struct Result<T>
     {
         private readonly T m_Value;
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
         private readonly ExceptionDispatchInfo m_Exception;
 #else
         private readonly Exception m_Exception;
@@ -76,7 +76,7 @@
         /// <param name="error">The exception representing error. Cannot be <see langword="null"/>.</param>
         public Result(Exception error)
         {
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
             if (error is null) throw new ArgumentNullException(nameof(error));
             m_Exception = ExceptionDispatchInfo.Capture(error);
 #else
@@ -86,7 +86,7 @@
             m_Value = default;
         }
 
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
 #endif
         internal static ref readonly T GetReference(in Result<T> result)
@@ -103,7 +103,7 @@
         {
             get
             {
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
                 return m_Exception is null;
 #else
                 return m_Exception == null;
@@ -113,7 +113,7 @@
 
         private void Validate()
         {
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
             if (m_Exception is object) m_Exception.Throw();
 #else
             if (m_Exception != null) throw m_Exception;
@@ -141,7 +141,7 @@
         public bool TryGet(out T value)
         {
             value = m_Value;
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return m_Exception is null;
 #else
             return m_Exception == null;
@@ -155,7 +155,7 @@
         {
             get
             {
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
                 return m_Exception?.SourceException;
 #else
                 return m_Exception;
@@ -192,7 +192,7 @@
         /// <returns><see langword="true"/> if both results are successful; otherwise, <see langword="false"/>.</returns>
         public static bool operator &(in Result<T> left, in Result<T> right)
         {
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return left.m_Exception is null && right.m_Exception is null;
 #else
             return left.m_Exception == null && right.m_Exception == null;
@@ -206,7 +206,7 @@
         /// <returns><see langword="true"/> if this result is successful; <see langword="false"/> if this result represents exception.</returns>
         public static bool operator true(in Result<T> result)
         {
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return result.m_Exception is null;
 #else
             return result.m_Exception == null;
@@ -221,7 +221,7 @@
         public static bool operator false(in Result<T> result)
         {
             // Note, this appears not testable, as we don't have a short-circuit operator that we can use.
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return result.m_Exception is object;
 #else
             return result.m_Exception != null;
@@ -234,7 +234,7 @@
         /// <returns>The textual representation of this object.</returns>
         public override string ToString()
         {
-#if NET45_OR_GREATER || NETSTANDARD
+#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return m_Exception?.SourceException.ToString() ?? m_Value?.ToString() ?? "<NULL>";
 #else
             return m_Exception?.ToString() ?? m_Value?.ToString() ?? "<NULL>";
