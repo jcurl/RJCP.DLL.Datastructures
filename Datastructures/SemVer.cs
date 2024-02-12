@@ -237,7 +237,7 @@ namespace RJCP.Core
 
         private static void CheckPreRelease(string value)
         {
-            if (value == null) throw new ArgumentNullException(nameof(value));
+            ThrowHelper.ThrowIfNull(value);
             for (int i = 0; i < value.Length; i++) {
                 char c = value[i];
                 if (!(c >= 'a' && c <= 'z' ||
@@ -283,7 +283,7 @@ namespace RJCP.Core
             bool build = false;
             bool preRelease = false;
 
-            if (version == null) throw new ArgumentNullException(nameof(version));
+            ThrowHelper.ThrowIfNull(version);
             int length = version.Length;
 
             int cursor = 0;
@@ -534,7 +534,7 @@ namespace RJCP.Core
         /// <exception cref="ArgumentNullException">info</exception>
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            if (info == null) throw new ArgumentNullException(nameof(info));
+            ThrowHelper.ThrowIfNull(info);
             info.AddValue("SemVer", ToString());
         }
 

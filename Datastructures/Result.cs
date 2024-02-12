@@ -76,11 +76,10 @@
         /// <param name="error">The exception representing error. Cannot be <see langword="null"/>.</param>
         public Result(Exception error)
         {
+            ThrowHelper.ThrowIfNull(error);
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
-            if (error is null) throw new ArgumentNullException(nameof(error));
             m_Exception = ExceptionDispatchInfo.Capture(error);
 #else
-            if (error == null) throw new ArgumentNullException(nameof(error));
             m_Exception = error;
 #endif
             m_Value = default;

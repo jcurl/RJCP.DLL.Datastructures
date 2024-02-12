@@ -52,7 +52,7 @@
 
             protected set
             {
-                if (value == null) throw new ArgumentNullException(nameof(value));
+                ThrowHelper.ThrowIfNull(value);
                 if (m_Name != null) throw new InvalidOperationException("Name is read only");
                 m_Name = value;
             }
@@ -71,7 +71,7 @@
         {
             get
             {
-                if (key == null) throw new ArgumentNullException(nameof(key));
+                ThrowHelper.ThrowIfNull(key);
                 if (m_Items.TryGetValue(key, out T item)) return item;
                 throw new KeyNotFoundException("Key not found in the collection");
             }
@@ -153,7 +153,7 @@
         /// </exception>
         public void AddRange(IEnumerable<T> items)
         {
-            if (items == null) throw new ArgumentNullException(nameof(items));
+            ThrowHelper.ThrowIfNull(items);
 
             foreach (T item in items) {
                 OnAdd(item);
@@ -172,7 +172,7 @@
 
         private void InternalAddCheck(T item)
         {
-            if (item == null) throw new ArgumentNullException(nameof(item));
+            ThrowHelper.ThrowIfNull(item);
             if (item.Name == null) throw new ArgumentException("Name may not be null", nameof(item));
             if (IsReadOnly) throw new InvalidOperationException("Collection is read only");
             if (m_Items.ContainsKey(item.Name)) {
@@ -279,7 +279,7 @@
         /// </exception>
         public bool Contains(T item)
         {
-            if (item == null) throw new ArgumentNullException(nameof(item));
+            ThrowHelper.ThrowIfNull(item);
             return m_Items.ContainsValue(item);
         }
 
@@ -351,7 +351,7 @@
         /// <exception cref="ArgumentException"><see cref="INamedItem.Name"/> field of <paramref name="item"/> is <see langword="null"/>.</exception>
         public bool Remove(T item)
         {
-            if (item == null) throw new ArgumentNullException(nameof(item));
+            ThrowHelper.ThrowIfNull(item);
             if (!Contains(item)) return false;
             return InternalRemoveWithChecks(item);
         }
@@ -371,7 +371,7 @@
         /// </exception>
         public bool Remove(string itemName)
         {
-            if (itemName == null) throw new ArgumentNullException(nameof(itemName));
+            ThrowHelper.ThrowIfNull(itemName);
             if (!Contains(itemName)) return false;
             return InternalRemoveWithChecks(m_Items[itemName]);
         }
@@ -405,7 +405,7 @@
         /// <exception cref="InvalidOperationException">Collection is read only.</exception>
         protected bool InternalRemove(string itemName)
         {
-            if (itemName == null) throw new ArgumentNullException(nameof(itemName));
+            ThrowHelper.ThrowIfNull(itemName);
             if (IsReadOnly) throw new InvalidOperationException("Collection is read only");
             return m_Items.Remove(itemName);
         }
