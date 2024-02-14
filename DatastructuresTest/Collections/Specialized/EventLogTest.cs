@@ -23,7 +23,7 @@
         {
             public static EventEntry<EventData> Get(EventSeverity severity, string description)
             {
-                EventData data = new EventData(severity, description);
+                EventData data = new(severity, description);
                 return new EventEntry<EventData>(data);
             }
 
@@ -39,7 +39,7 @@
 
             public int CompareTo(EventData other)
             {
-                if (other == null) return 1;
+                if (other is null) return 1;
                 if (Severity < other.Severity) return -1;
                 if (Severity > other.Severity) return 1;
                 return 0;
@@ -77,7 +77,7 @@
         [Test]
         public void Default()
         {
-            EventLog<EventData> log = new EventLog<EventData>();
+            EventLog<EventData> log = new();
             Assert.That(log, Is.Empty);
             Assert.That(log.IsReadOnly, Is.False);
         }
@@ -86,8 +86,8 @@
         [TestCase(TestMode.InsertAtEnd)]
         public void AddEvent(TestMode mode)
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -121,8 +121,8 @@
         [TestCase(TestMode.InsertAtEnd)]
         public void AddEvents(TestMode mode)
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -169,8 +169,8 @@
         [TestCase(TestMode.InsertAtEnd)]
         public void AddEventsSameSeverity(TestMode mode)
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -218,8 +218,8 @@
         [TestCase(TestMode.InsertAtEnd)]
         public void AddSameEvents(TestMode mode)
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -267,8 +267,8 @@
         [Test]
         public void InsertAtBeginning()
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -294,8 +294,8 @@
         [TestCase(TestMode.InsertAtEnd)]
         public void AddEventsSimple(TestMode mode)
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventSeverity> log = new EventLog<EventSeverity>();
+            List<NotifyAction> notify = new();
+            EventLog<EventSeverity> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -340,7 +340,7 @@
         [Test]
         public void IndexInRange()
         {
-            EventLog<EventSeverity> log = new EventLog<EventSeverity> {
+            EventLog<EventSeverity> log = new() {
                 new EventEntry<EventSeverity>(EventSeverity.Warning),
                 new EventEntry<EventSeverity>(EventSeverity.Information)
             };
@@ -352,7 +352,7 @@
         [Test]
         public void IndexOutOfRange()
         {
-            EventLog<EventSeverity> log = new EventLog<EventSeverity> {
+            EventLog<EventSeverity> log = new() {
                 new EventEntry<EventSeverity>(EventSeverity.Warning),
                 new EventEntry<EventSeverity>(EventSeverity.Information)
             };
@@ -365,7 +365,7 @@
         [Test]
         public void IndexSet()
         {
-            EventLog<EventSeverity> log = new EventLog<EventSeverity> {
+            EventLog<EventSeverity> log = new() {
                 new EventEntry<EventSeverity>(EventSeverity.Warning),
                 new EventEntry<EventSeverity>(EventSeverity.Information)
             };
@@ -378,7 +378,7 @@
         [Test]
         public void IndexOf()
         {
-            EventLog<EventData> log = new EventLog<EventData>();
+            EventLog<EventData> log = new();
             EventEntry<EventData> e1 = EventData.Get(EventSeverity.Warning, "Warning 1");
             EventEntry<EventData> e2 = EventData.Get(EventSeverity.Warning, "Warning 2");
             EventEntry<EventData> e3 = EventData.Get(EventSeverity.Warning, "Warning 2");
@@ -396,7 +396,7 @@
         [Test]
         public void Contains()
         {
-            EventLog<EventData> log = new EventLog<EventData>();
+            EventLog<EventData> log = new();
             EventEntry<EventData> e1 = EventData.Get(EventSeverity.Warning, "Warning 1");
             EventEntry<EventData> e2 = EventData.Get(EventSeverity.Warning, "Warning 2");
             EventEntry<EventData> e3 = EventData.Get(EventSeverity.Warning, "Warning 2");
@@ -414,8 +414,8 @@
         [Test]
         public void RemoveAt()
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -441,8 +441,8 @@
         [Test]
         public void Remove()
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -470,8 +470,8 @@
         [Test]
         public void Clear()
         {
-            List<NotifyAction> notify = new List<NotifyAction>();
-            EventLog<EventData> log = new EventLog<EventData>();
+            List<NotifyAction> notify = new();
+            EventLog<EventData> log = new();
             log.CollectionChanged += (s, e) => {
                 notify.Add(new NotifyAction(e));
             };
@@ -495,7 +495,7 @@
         [Test]
         public void CopyTo()
         {
-            EventLog<EventSeverity> log = new EventLog<EventSeverity> {
+            EventLog<EventSeverity> log = new() {
                 new EventEntry<EventSeverity>(EventSeverity.Warning),
                 new EventEntry<EventSeverity>(EventSeverity.Information)
             };

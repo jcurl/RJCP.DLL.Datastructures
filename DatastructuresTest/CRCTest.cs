@@ -21,7 +21,7 @@
             }
 
             // Check that calculating the CRC without a predetermined table also works
-            using (Crc32 crc32 = new Crc32(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true)) {
+            using (Crc32 crc32 = new(0x04C11DB7, 0xFFFFFFFF, 0xFFFFFFFF, true)) {
                 byte[] r = crc32.ComputeHash(m);
                 Assert.That(r, Has.Length.EqualTo(4));
                 Assert.That(r[0], Is.EqualTo(0x26));

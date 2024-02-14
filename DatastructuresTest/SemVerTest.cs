@@ -15,7 +15,7 @@
 
         public void BasicSemVer(string version, int major, int minor, int patch)
         {
-            SemVer v = new SemVer(version);
+            SemVer v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -29,7 +29,7 @@
         [TestCase("1.1.2.234", 1, 1, 2, 234)]
         public void SemVerWithBuild(string version, int major, int minor, int patch, int build)
         {
-            SemVer v = new SemVer(version);
+            SemVer v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -45,7 +45,7 @@
         [TestCase("1.0.123-prex.2", 1, 0, 123, "prex.2")]
         public void SemVerWithPreRelease(string version, int major, int minor, int patch, string preRelease)
         {
-            SemVer v = new SemVer(version);
+            SemVer v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -59,7 +59,7 @@
         [TestCase("1.1.2.234-beta", 1, 1, 2, 234, "beta")]
         public void SemVerWithBuildPreRelease(string version, int major, int minor, int patch, int build, string preRelease)
         {
-            SemVer v = new SemVer(version);
+            SemVer v = new(version);
             Assert.That(v.Major, Is.EqualTo(major));
             Assert.That(v.Minor, Is.EqualTo(minor));
             Assert.That(v.Patch, Is.EqualTo(patch));
@@ -72,7 +72,7 @@
         [Test]
         public void SemVerWithNullPreRelease()
         {
-            SemVer v = new SemVer(1, 0, 0, 0, null);
+            SemVer v = new(1, 0, 0, 0, null);
             Assert.That(v.ToString(), Is.EqualTo("1.0.0.0"));
             Assert.That(v.Major, Is.EqualTo(1));
             Assert.That(v.Minor, Is.EqualTo(0));
@@ -138,8 +138,8 @@
         [TestCase("2.1.0", "2.1.1")]
         public void Compare(string left, string right)
         {
-            SemVer leftVersion = new SemVer(left);
-            SemVer rightVersion = new SemVer(right);
+            SemVer leftVersion = new(left);
+            SemVer rightVersion = new(right);
 
             SemVer left2 = leftVersion;
             SemVer right2 = rightVersion;
@@ -163,8 +163,8 @@
         {
             SemVer vn1 = null;
             SemVer vn2 = null;
-            SemVer vv1 = new SemVer("1.0.0");
-            SemVer vv2 = new SemVer("2.0.0");
+            SemVer vv1 = new("1.0.0");
+            SemVer vv2 = new("2.0.0");
 
             Assert.That(vn1 == vn2);
             Assert.That(vn1 <= vn2);
@@ -180,8 +180,8 @@
         [TestCase("1.0.0", "1.0.0.0")]
         public void CompareEqual(string left, string right)
         {
-            SemVer leftVersion = new SemVer(left);
-            SemVer rightVersion = new SemVer(right);
+            SemVer leftVersion = new(left);
+            SemVer rightVersion = new(right);
 
             Assert.That(leftVersion == new SemVer(left));
             Assert.That(rightVersion == new SemVer(right));
@@ -203,8 +203,8 @@
         [TestCase("1.0.0.1-beta")]
         public void CompareToSemVer2(string version)
         {
-            SemVer2 left = new SemVer2(version);
-            SemVer right = new SemVer(version);
+            SemVer2 left = new(version);
+            SemVer right = new(version);
 
             // The right object can't be is downcast to the left object. Thus it is treated as newer.
             Assert.That(() => { left.CompareTo(right); }, Throws.TypeOf<ArgumentException>());

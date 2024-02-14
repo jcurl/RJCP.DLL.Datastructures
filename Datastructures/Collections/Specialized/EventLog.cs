@@ -11,7 +11,7 @@
     /// <typeparam name="T">The type of data used for identification in the <see cref="IEvent{T}"/>.</typeparam>
     public class EventLog<T> : IList<IEvent<T>>, INotifyCollectionChanged
     {
-        private readonly List<IEvent<T>> m_Events = new List<IEvent<T>>();
+        private readonly List<IEvent<T>> m_Events = new();
 
         #region IList
         /// <summary>
@@ -186,7 +186,7 @@
         protected virtual void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
         {
             NotifyCollectionChangedEventHandler handler = CollectionChanged;
-            if (handler != null) handler(sender, args);
+            if (handler is not null) handler(sender, args);
         }
         #endregion
 
@@ -194,8 +194,8 @@
         {
             // https://learn.microsoft.com/en-us/dotnet/standard/collections/comparisons-and-sorts-within-collections
 
-            if (item != null && item.Identifier is IComparable<T> comparable) {
-                if (Max == null) {
+            if (item is not null && item.Identifier is IComparable<T> comparable) {
+                if (Max is null) {
                     Max = item;
                     return;
                 }

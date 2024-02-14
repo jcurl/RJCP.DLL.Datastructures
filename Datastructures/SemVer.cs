@@ -215,7 +215,7 @@ namespace RJCP.Core
             get { return m_PreRelease; }
             private set
             {
-                if (value == null) {
+                if (value is null) {
                     m_PreRelease = string.Empty;
                 } else {
                     CheckPreRelease(value);
@@ -358,7 +358,7 @@ namespace RJCP.Core
         /// </returns>
         public int CompareTo(SemVer other)
         {
-            if (other == null) return 1;
+            if (other is null) return 1;
             if (!GetType().IsInstanceOfType(other)) throw new ArgumentException(Messages.Infra_ObjectTypeNotCompatible);
 
             if (Major > other.Major) return 1;
@@ -401,7 +401,7 @@ namespace RJCP.Core
         /// <returns>The result of the operator.</returns>
         public static bool operator <(SemVer left, SemVer right)
         {
-            if (left is null) return right is object;
+            if (left is null) return right is not null;
             return left.CompareTo(right) < 0;
         }
 
@@ -450,10 +450,8 @@ namespace RJCP.Core
         /// </returns>
         public override bool Equals(object obj)
         {
-            SemVer semObj = obj as SemVer;
-            if (semObj == null) return false;
-
-            return Equals(semObj);
+            if (obj is SemVer semObj) return Equals(semObj);
+            return false;
         }
 
         private bool m_HashCodeGenerated;
@@ -493,7 +491,7 @@ namespace RJCP.Core
         /// <returns>The result of the operator.</returns>
         public static bool operator !=(SemVer left, SemVer right)
         {
-            if (left is null) return right is object;
+            if (left is null) return right is not null;
             return left.CompareTo(right) != 0;
         }
         #endregion
@@ -502,7 +500,7 @@ namespace RJCP.Core
 
         private string GetVersion(bool hashGen)
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             sb.Append(Major).Append('.')
                 .Append(Minor).Append('.')
                 .Append(Patch);
@@ -520,9 +518,7 @@ namespace RJCP.Core
         /// <returns>A <see cref="string"/> that represents this instance.</returns>
         public override string ToString()
         {
-            if (m_Version == null) {
-                m_Version = GetVersion(false);
-            }
+            m_Version ??= GetVersion(false);
             return m_Version;
         }
 

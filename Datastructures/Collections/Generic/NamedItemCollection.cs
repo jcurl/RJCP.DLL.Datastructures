@@ -53,12 +53,12 @@
             protected set
             {
                 ThrowHelper.ThrowIfNull(value);
-                if (m_Name != null) throw new InvalidOperationException("Name is read only");
+                if (m_Name is not null) throw new InvalidOperationException("Name is read only");
                 m_Name = value;
             }
         }
 
-        private readonly Dictionary<string, T> m_Items = new Dictionary<string, T>();
+        private readonly Dictionary<string, T> m_Items = new();
 
         /// <summary>
         /// Gets the item for the given <paramref name="key"/>.
@@ -173,7 +173,7 @@
         private void InternalAddCheck(T item)
         {
             ThrowHelper.ThrowIfNull(item);
-            if (item.Name == null) throw new ArgumentException("Name may not be null", nameof(item));
+            if (item.Name is null) throw new ArgumentException("Name may not be null", nameof(item));
             if (IsReadOnly) throw new InvalidOperationException("Collection is read only");
             if (m_Items.ContainsKey(item.Name)) {
                 string message = string.Format("Item with name '{0}' already exists in the collection", item.Name);
@@ -262,7 +262,7 @@
         /// </remarks>
         public bool Contains(string itemName)
         {
-            if (itemName == null) return false;
+            if (itemName is null) return false;
             return m_Items.ContainsKey(itemName);
         }
 
@@ -379,7 +379,7 @@
         private bool InternalRemoveWithChecks(T item)
         {
             if (IsReadOnly) throw new InvalidOperationException("Collection is read only");
-            if (item.Name == null) throw new ArgumentException("Name may not be null", nameof(item));
+            if (item.Name is null) throw new ArgumentException("Name may not be null", nameof(item));
 
             OnRemove(item);
             if (m_Items.Remove(item.Name)) {

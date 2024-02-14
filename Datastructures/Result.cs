@@ -105,7 +105,7 @@
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
                 return m_Exception is null;
 #else
-                return m_Exception == null;
+                return m_Exception is null;
 #endif
             }
         }
@@ -113,9 +113,9 @@
         private void Validate()
         {
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
-            if (m_Exception is object) m_Exception.Throw();
+            if (m_Exception is not null) m_Exception.Throw();
 #else
-            if (m_Exception != null) throw m_Exception;
+            if (m_Exception is not null) throw m_Exception;
 #endif
         }
 
@@ -143,7 +143,7 @@
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
             return m_Exception is null;
 #else
-            return m_Exception == null;
+            return m_Exception is null;
 #endif
         }
 
@@ -194,7 +194,7 @@
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
             return left.m_Exception is null && right.m_Exception is null;
 #else
-            return left.m_Exception == null && right.m_Exception == null;
+            return left.m_Exception is null && right.m_Exception is null;
 #endif
         }
 
@@ -208,7 +208,7 @@
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
             return result.m_Exception is null;
 #else
-            return result.m_Exception == null;
+            return result.m_Exception is null;
 #endif
         }
 
@@ -221,9 +221,9 @@
         {
             // Note, this appears not testable, as we don't have a short-circuit operator that we can use.
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
-            return result.m_Exception is object;
+            return result.m_Exception is not null;
 #else
-            return result.m_Exception != null;
+            return result.m_Exception is not null;
 #endif
         }
 

@@ -6,7 +6,7 @@ namespace RJCP.Core
     public class CRCBenchmark
     {
         private readonly byte[] m_Data;
-        private readonly Crc16Ibm m_Crc16 = new Crc16Ibm();
+        private readonly Crc16Ibm m_Crc16 = new();
         private readonly Crc32 m_Crc32 = new Crc32Standard();
 
         public CRCBenchmark()

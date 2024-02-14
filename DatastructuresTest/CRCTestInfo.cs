@@ -60,7 +60,7 @@
         [Test]
         public void Crc16_Info_DumpTable()
         {
-            using (Crc16TableDump crcdump = new Crc16TableDump()) {
+            using (Crc16TableDump crcdump = new()) {
                 crcdump.DumpTable();
             }
         }
@@ -87,7 +87,7 @@
         [Test]
         public void Crc32_Info_DumpTable()
         {
-            using (Crc32TableDump crcdump = new Crc32TableDump()) {
+            using (Crc32TableDump crcdump = new()) {
                 crcdump.DumpTable();
             }
         }
