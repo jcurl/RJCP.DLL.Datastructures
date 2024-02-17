@@ -20,65 +20,65 @@ Intel Core i7-6700T CPU 2.80GHz (Skylake), 1 CPU(s), 8 logical and 4 physical co
 ```
 
 ```text
-Results = netcore31
+Results = netcore
 
 BenchmarkDotNet=v0.13.12 OS=Windows 10 (10.0.19045.3930/22H2/2022Update)
 Intel Core i7-6700T CPU 2.80GHz (Skylake), 1 CPU(s), 8 logical and 4 physical core(s)
-  [HOST] : .NET Core 3.1.32 (CoreCLR 4.700.22.55902, CoreFX 4.700.22.56512), X64 RyuJIT
+  [HOST] : .NET 6.0.26 (6.0.2623.60508), X64 RyuJIT
 ```
 
-| Project 'datastructures' Type | Method                  | mean (net48) | stderr  | mean (netcore31) | stderr  |
-|:------------------------------|:------------------------|-------------:|--------:|-----------------:|--------:|
-| BitOperationsBenchmark        | Copy16Pointer           | 0.34         | 0.00    | 0.49             | 0.01    |
-| BitOperationsBenchmark        | Copy16PointerFrom32     | 0.69         | 0.00    | 0.40             | 0.01    |
-| BitOperationsBenchmark        | Copy32Pointer           | 0.34         | 0.00    | 0.45             | 0.01    |
-| BitOperationsBenchmark        | Copy64Pointer           | 0.35         | 0.00    | 0.86             | 0.01    |
-| BitOperationsBenchmark        | Copy32FloatPointer      | 0.41         | 0.00    | 0.58             | 0.01    |
-| BitOperationsBenchmark        | Copy64FloatPointer      | 0.41         | 0.00    | 0.70             | 0.01    |
-| BitOperationsBenchmark        | Copy16PointerSwap       | 0.34         | 0.00    | 0.36             | 0.02    |
-| BitOperationsBenchmark        | Copy16PointerSwapFrom32 | 0.33         | 0.00    | 0.38             | 0.01    |
-| BitOperationsBenchmark        | Copy32PointerSwap       | 0.34         | 0.00    | 0.42             | 0.01    |
-| BitOperationsBenchmark        | Copy64PointerSwap       | 0.35         | 0.00    | 0.38             | 0.01    |
-| BitOperationsBenchmark        | Copy32FloatPointerSwap  | 1.54         | 0.00    | 1.55             | 0.01    |
-| BitOperationsBenchmark        | Copy64FloatPointerSwap  | 3.21         | 0.08    | 2.40             | 0.01    |
-| BitOperationsBenchmark        | Copy16ShiftLE           | 0.23         | 0.01    | 0.00             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftLEFrom32     | 0.18         | 0.01    | 0.29             | 0.00    |
-| BitOperationsBenchmark        | Copy32ShiftLE           | 0.34         | 0.01    | 0.33             | 0.00    |
-| BitOperationsBenchmark        | Copy64ShiftLE           | 0.99         | 0.01    | 0.93             | 0.00    |
-| BitOperationsBenchmark        | Copy32FloatShiftLE      | 1.05         | 0.01    | 0.75             | 0.00    |
-| BitOperationsBenchmark        | Copy64FloatShiftLE      | 2.93         | 0.01    | 2.78             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftBE           | 0.25         | 0.00    | 0.29             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftBEFrom32     | 0.28         | 0.00    | 0.29             | 0.00    |
-| BitOperationsBenchmark        | Copy32ShiftBE           | 0.31         | 0.00    | 0.31             | 0.00    |
-| BitOperationsBenchmark        | Copy64ShiftBE           | 1.00         | 0.01    | 0.93             | 0.00    |
-| BitOperationsBenchmark        | Copy32FloatShiftBE      | 1.34         | 0.02    | 0.95             | 0.00    |
-| BitOperationsBenchmark        | Copy64FloatShiftBE      | 3.05         | 0.02    | 2.79             | 0.00    |
-| BitOperationsBenchmark        | Copy16Shift             | 0.25         | 0.00    | 0.29             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftFrom32       | 0.25         | 0.00    | 0.00             | 0.00    |
-| BitOperationsBenchmark        | Copy32Shift             | 0.36         | 0.01    | 0.31             | 0.00    |
-| BitOperationsBenchmark        | Copy64Shift             | 1.05         | 0.01    | 0.91             | 0.00    |
-| BitOperationsBenchmark        | Copy32FloatShift        | 1.28         | 0.01    | 0.76             | 0.00    |
-| BitOperationsBenchmark        | Copy64FloatShift        | 3.20         | 0.03    | 2.79             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftLESpan       | -            | -       | 0.29             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftLESpanFrom32 | -            | -       | 0.31             | 0.00    |
-| BitOperationsBenchmark        | Copy32ShiftLESpan       | -            | -       | 0.34             | 0.00    |
-| BitOperationsBenchmark        | Copy64ShiftLESpan       | -            | -       | 1.07             | 0.00    |
-| BitOperationsBenchmark        | Copy32FloatShiftLESpan  | -            | -       | 0.97             | 0.00    |
-| BitOperationsBenchmark        | Copy64FloatShiftLESpan  | -            | -       | 2.96             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftBESpan       | -            | -       | 0.28             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftBESpanFrom32 | -            | -       | 0.31             | 0.00    |
-| BitOperationsBenchmark        | Copy32ShiftBESpan       | -            | -       | 0.34             | 0.00    |
-| BitOperationsBenchmark        | Copy64ShiftBESpan       | -            | -       | 1.02             | 0.00    |
-| BitOperationsBenchmark        | Copy32FloatShiftBESpan  | -            | -       | 1.01             | 0.00    |
-| BitOperationsBenchmark        | Copy64FloatShiftBESpan  | -            | -       | 2.93             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftSpan         | -            | -       | 0.28             | 0.00    |
-| BitOperationsBenchmark        | Copy16ShiftSpanFrom32   | -            | -       | 0.30             | 0.00    |
-| BitOperationsBenchmark        | Copy32ShiftSpan         | -            | -       | 0.75             | 0.00    |
-| BitOperationsBenchmark        | Copy64ShiftSpan         | -            | -       | 1.10             | 0.00    |
-| BitOperationsBenchmark        | Copy32FloatShiftSpan    | -            | -       | 1.12             | 0.00    |
-| BitOperationsBenchmark        | Copy64FloatShiftSpan    | -            | -       | 2.88             | 0.00    |
-| CRCBenchmark                  | CRC16                   | 3123028.43   | 872.30  | 3022825.99       | 3316.74 |
-| CRCBenchmark                  | CRC32                   | 2802209.65   | 1588.20 | 2712745.31       | 2542.83 |
+| Project 'datastructures' Type | Method                  | mean (net48) | stderr   | mean (netcore) | stderr  |
+|:------------------------------|:------------------------|-------------:|---------:|---------------:|--------:|
+| BitOperationsBenchmark        | Copy16Pointer           | 0.70         | 0.00     | 0.27           | 0.02    |
+| BitOperationsBenchmark        | Copy16PointerFrom32     | 0.33         | 0.00     | 0.21           | 0.01    |
+| BitOperationsBenchmark        | Copy32Pointer           | 0.34         | 0.00     | 0.43           | 0.00    |
+| BitOperationsBenchmark        | Copy64Pointer           | 0.35         | 0.00     | 0.50           | 0.00    |
+| BitOperationsBenchmark        | Copy32FloatPointer      | 0.40         | 0.00     | 0.39           | 0.00    |
+| BitOperationsBenchmark        | Copy64FloatPointer      | 0.41         | 0.00     | 0.50           | 0.00    |
+| BitOperationsBenchmark        | Copy16PointerSwap       | 0.34         | 0.00     | 0.29           | 0.00    |
+| BitOperationsBenchmark        | Copy16PointerSwapFrom32 | 0.34         | 0.00     | 0.31           | 0.00    |
+| BitOperationsBenchmark        | Copy32PointerSwap       | 0.36         | 0.01     | 0.43           | 0.00    |
+| BitOperationsBenchmark        | Copy64PointerSwap       | 0.36         | 0.00     | 0.49           | 0.00    |
+| BitOperationsBenchmark        | Copy32FloatPointerSwap  | 1.81         | 0.03     | 1.23           | 0.00    |
+| BitOperationsBenchmark        | Copy64FloatPointerSwap  | 2.34         | 0.02     | 2.16           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftLE           | 0.31         | 0.01     | 0.00           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftLEFrom32     | 0.27         | 0.01     | 0.00           | 0.00    |
+| BitOperationsBenchmark        | Copy32ShiftLE           | 0.32         | 0.01     | 0.41           | 0.00    |
+| BitOperationsBenchmark        | Copy64ShiftLE           | 1.08         | 0.01     | 0.90           | 0.00    |
+| BitOperationsBenchmark        | Copy32FloatShiftLE      | 1.09         | 0.01     | 0.89           | 0.00    |
+| BitOperationsBenchmark        | Copy64FloatShiftLE      | 3.04         | 0.02     | 2.71           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftBE           | 0.23         | 0.01     | 0.00           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftBEFrom32     | 0.29         | 0.01     | 0.00           | 0.00    |
+| BitOperationsBenchmark        | Copy32ShiftBE           | 0.31         | 0.01     | 0.52           | 0.01    |
+| BitOperationsBenchmark        | Copy64ShiftBE           | 1.04         | 0.01     | 1.12           | 0.01    |
+| BitOperationsBenchmark        | Copy32FloatShiftBE      | 1.35         | 0.02     | 1.06           | 0.01    |
+| BitOperationsBenchmark        | Copy64FloatShiftBE      | 3.10         | 0.02     | 2.88           | 0.02    |
+| BitOperationsBenchmark        | Copy16Shift             | 0.27         | 0.01     | 0.00           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftFrom32       | 0.24         | 0.00     | 0.00           | 0.00    |
+| BitOperationsBenchmark        | Copy32Shift             | 0.36         | 0.01     | 0.53           | 0.01    |
+| BitOperationsBenchmark        | Copy64Shift             | 1.03         | 0.01     | 0.91           | 0.01    |
+| BitOperationsBenchmark        | Copy32FloatShift        | 1.25         | 0.01     | 0.89           | 0.01    |
+| BitOperationsBenchmark        | Copy64FloatShift        | 3.19         | 0.01     | 2.75           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftLESpan       | -            | -        | 0.14           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftLESpanFrom32 | -            | -        | 0.93           | 0.01    |
+| BitOperationsBenchmark        | Copy32ShiftLESpan       | -            | -        | 0.35           | 0.01    |
+| BitOperationsBenchmark        | Copy64ShiftLESpan       | -            | -        | 1.03           | 0.00    |
+| BitOperationsBenchmark        | Copy32FloatShiftLESpan  | -            | -        | 0.94           | 0.00    |
+| BitOperationsBenchmark        | Copy64FloatShiftLESpan  | -            | -        | 2.76           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftBESpan       | -            | -        | 0.25           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftBESpanFrom32 | -            | -        | 0.26           | 0.00    |
+| BitOperationsBenchmark        | Copy32ShiftBESpan       | -            | -        | 0.32           | 0.00    |
+| BitOperationsBenchmark        | Copy64ShiftBESpan       | -            | -        | 1.02           | 0.00    |
+| BitOperationsBenchmark        | Copy32FloatShiftBESpan  | -            | -        | 0.94           | 0.00    |
+| BitOperationsBenchmark        | Copy64FloatShiftBESpan  | -            | -        | 2.87           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftSpan         | -            | -        | 0.11           | 0.00    |
+| BitOperationsBenchmark        | Copy16ShiftSpanFrom32   | -            | -        | 0.10           | 0.00    |
+| BitOperationsBenchmark        | Copy32ShiftSpan         | -            | -        | 0.34           | 0.00    |
+| BitOperationsBenchmark        | Copy64ShiftSpan         | -            | -        | 0.99           | 0.00    |
+| BitOperationsBenchmark        | Copy32FloatShiftSpan    | -            | -        | 0.92           | 0.00    |
+| BitOperationsBenchmark        | Copy64FloatShiftSpan    | -            | -        | 2.89           | 0.01    |
+| CRCBenchmark                  | CRC16                   | 3227820.29   | 15685.03 | 3007736.20     | 2802.17 |
+| CRCBenchmark                  | CRC32                   | 2901011.72   | 11058.02 | 2695579.06     | 3628.60 |
 
 ### Interpretation
 
