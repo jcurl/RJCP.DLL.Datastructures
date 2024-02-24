@@ -93,6 +93,11 @@ actions can be performed if an error or a critical event was logged.
 
 ### 2.1. Version 0.2.1
 
+Bugfixes:
+
+- Exceptions now throw stack trace information on .NET Framework and .NET 6.0
+  (DOTNET-867)
+
 Quality:
 
 - Add README.md reference to NuGet package (DOTNET-811)

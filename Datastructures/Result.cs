@@ -1,9 +1,10 @@
 ﻿namespace RJCP.Core
 {
     using System;
-    using System.Runtime.CompilerServices;
+    using System.Diagnostics;
 
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
+    using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 #endif
 
@@ -31,7 +32,9 @@
         /// <returns>The exception encapsulated by <see cref="Result{T}"/>.</returns>
         public static Result<T> FromException<T>(Exception e)
         {
-            return new Result<T>(e);
+            ThrowHelper.ThrowIfNull(e);
+            StackTrace stack = new(1, true);
+            return new Result<T>(e, stack);
         }
 
         /// <summary>
@@ -74,13 +77,32 @@
         /// Initializes a new unsuccessful result.
         /// </summary>
         /// <param name="error">The exception representing error. Cannot be <see langword="null"/>.</param>
+        /// <remarks>
+        /// On .NET 6.0, the stacktrace is stored with the exception.
+        /// </remarks>
         public Result(Exception error)
         {
             ThrowHelper.ThrowIfNull(error);
-#if NET45_OR_GREATER || NET6_0_OR_GREATER
-            m_Exception = ExceptionDispatchInfo.Capture(error);
+#if NET6_0_OR_GREATER
+            m_Exception = ExceptionDispatchInfo.Capture(ExceptionDispatchInfo.SetCurrentStackTrace(error));
+#elif NET45_OR_GREATER
+            StackTrace stack = new(1, true);
+            m_Exception = ExceptionDispatchInfo.Capture(ExceptionExtensions.SetStackTrace(error, stack));
 #else
-            m_Exception = error;
+            StackTrace stack = new(1, true);
+            m_Exception = ExceptionExtensions.SetStackTrace(error, stack);
+#endif
+            m_Value = default;
+        }
+
+        internal Result(Exception error, StackTrace stack)
+        {
+#if NET6_0_OR_GREATER
+            m_Exception = ExceptionDispatchInfo.Capture(ExceptionDispatchInfo.SetRemoteStackTrace(error, stack.ToString()));
+#elif NET45_OR_GREATER
+            m_Exception = ExceptionDispatchInfo.Capture(ExceptionExtensions.SetStackTrace(error, stack));
+#else
+            m_Exception = ExceptionExtensions.SetStackTrace(error, stack);
 #endif
             m_Value = default;
         }
@@ -102,18 +124,15 @@
         {
             get
             {
-#if NET45_OR_GREATER || NET6_0_OR_GREATER
                 return m_Exception is null;
-#else
-                return m_Exception is null;
-#endif
             }
         }
 
         private void Validate()
         {
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
-            if (m_Exception is not null) m_Exception.Throw();
+            //if (m_Exception is not null) m_Exception.Throw();
+            m_Exception?.Throw();
 #else
             if (m_Exception is not null) throw m_Exception;
 #endif
@@ -140,11 +159,7 @@
         public bool TryGet(out T value)
         {
             value = m_Value;
-#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return m_Exception is null;
-#else
-            return m_Exception is null;
-#endif
         }
 
         /// <summary>
@@ -191,11 +206,7 @@
         /// <returns><see langword="true"/> if both results are successful; otherwise, <see langword="false"/>.</returns>
         public static bool operator &(in Result<T> left, in Result<T> right)
         {
-#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return left.m_Exception is null && right.m_Exception is null;
-#else
-            return left.m_Exception is null && right.m_Exception is null;
-#endif
         }
 
         /// <summary>
@@ -205,11 +216,7 @@
         /// <returns><see langword="true"/> if this result is successful; <see langword="false"/> if this result represents exception.</returns>
         public static bool operator true(in Result<T> result)
         {
-#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return result.m_Exception is null;
-#else
-            return result.m_Exception is null;
-#endif
         }
 
         /// <summary>
@@ -220,11 +227,7 @@
         public static bool operator false(in Result<T> result)
         {
             // Note, this appears not testable, as we don't have a short-circuit operator that we can use.
-#if NET45_OR_GREATER || NET6_0_OR_GREATER
             return result.m_Exception is not null;
-#else
-            return result.m_Exception is not null;
-#endif
         }
 
         /// <summary>
@@ -240,4 +243,5 @@
 #endif
         }
     }
+
 }

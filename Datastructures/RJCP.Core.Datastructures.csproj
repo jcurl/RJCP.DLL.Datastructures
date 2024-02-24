@@ -76,6 +76,7 @@
     <Compile Include="SemVer.cs" />
     <Compile Include="SemVer2.cs" />
     <Compile Include="SemVerHelper.cs" />
+    <Compile Include="ExceptionExtensions.cs" />
   </ItemGroup>
 
   <ItemGroup>

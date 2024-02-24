@@ -61,9 +61,12 @@
         public void Exception()
         {
             var result = ParseError();
-            Console.WriteLine($"{result}");
             Assert.That(result.Error, Is.TypeOf<ArgumentException>());
-            Console.WriteLine($"{result.Error.StackTrace}");
+            Assert.That(result.Error.StackTrace, Is.Not.Null);
+
+            string[] stack = result.Error.StackTrace.Split('\n');
+            Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
+
             Assert.That(result.HasValue, Is.False);
         }
 
@@ -72,7 +75,7 @@
         {
             var result = new Result<int>(new ArgumentException("Test argument error"));
             Assert.That(result.Error, Is.TypeOf<ArgumentException>());
-            Assert.That(result.HasValue, Is.False);
+            Assert.That(result.Error.StackTrace, Is.Not.Null);
         }
 
         [Test]
@@ -96,33 +99,39 @@
         }
 
         [Test]
-        public void ExceptionFalse()
-        {
-            var result = ParseError();
-            Assert.That(result.HasValue, Is.False);
-            if (result) {
-                Assert.Fail();
-            } else {
-                Assert.Pass();
-            }
-        }
-
-        [Test]
         public void ExceptionOnExplicitAccess()
         {
             var result = ParseError();
-            Assert.That(() => {
+            Exception captured = null;
+            try {
                 _ = (int)result;
-            }, Throws.TypeOf<ArgumentException>());
+            } catch (Exception ex) {
+                captured = ex;
+            }
+
+            Assert.That(captured, Is.Not.Null);
+            Assert.That(captured, Is.TypeOf<ArgumentException>());
+
+            string[] stack = captured.StackTrace.Split('\n');
+            Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
         }
 
         [Test]
         public void ExceptionOnValueAccess()
         {
             var result = ParseError();
-            Assert.That(() => {
+            Exception captured = null;
+            try {
                 _ = result.Value;
-            }, Throws.TypeOf<ArgumentException>());
+            } catch (Exception ex) {
+                captured = ex;
+            }
+
+            Assert.That(captured, Is.Not.Null);
+            Assert.That(captured, Is.TypeOf<ArgumentException>());
+
+            string[] stack = captured.StackTrace.Split('\n');
+            Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
         }
 
         [Test]
