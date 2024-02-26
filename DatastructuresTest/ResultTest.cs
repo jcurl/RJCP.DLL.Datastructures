@@ -1,6 +1,7 @@
 ﻿namespace RJCP.Core
 {
     using System;
+    using System.Runtime.CompilerServices;
     using NUnit.Framework;
 
     [TestFixture]
@@ -11,6 +12,9 @@
             return 42;
         }
 
+        // For tests to work that refer to the stack trace (and we look for 'ParseError`), we must ensure that this
+        // method is not inlined, so that it shows up in the stack trace.
+        [MethodImpl(MethodImplOptions.NoInlining)]
         private static Result<int> ParseError()
         {
             return Result.FromException<int>(new ArgumentException("Test argument error"));
@@ -64,6 +68,7 @@
             Assert.That(result.Error, Is.TypeOf<ArgumentException>());
             Assert.That(result.Error.StackTrace, Is.Not.Null);
 
+            Console.WriteLine("{0}", result.Error.StackTrace);
             string[] stack = result.Error.StackTrace.Split('\n');
             Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
 
@@ -112,6 +117,7 @@
             Assert.That(captured, Is.Not.Null);
             Assert.That(captured, Is.TypeOf<ArgumentException>());
 
+            Console.WriteLine("{0}", result.Error.StackTrace);
             string[] stack = captured.StackTrace.Split('\n');
             Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
         }
@@ -130,6 +136,7 @@
             Assert.That(captured, Is.Not.Null);
             Assert.That(captured, Is.TypeOf<ArgumentException>());
 
+            Console.WriteLine("{0}", result.Error.StackTrace);
             string[] stack = captured.StackTrace.Split('\n');
             Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
         }

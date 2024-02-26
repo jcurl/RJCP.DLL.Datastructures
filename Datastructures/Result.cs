@@ -2,9 +2,9 @@
 {
     using System;
     using System.Diagnostics;
+    using System.Runtime.CompilerServices;
 
 #if NET45_OR_GREATER || NET6_0_OR_GREATER
-    using System.Runtime.CompilerServices;
     using System.Runtime.ExceptionServices;
 #endif
 
@@ -30,6 +30,10 @@
         /// <typeparam name="T">The type of the value.</typeparam>
         /// <param name="e">The exception to be placed to the container.</param>
         /// <returns>The exception encapsulated by <see cref="Result{T}"/>.</returns>
+        /// <remarks>
+        /// This method is not inlined, that the stack trace is reliable.
+        /// </remarks>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public static Result<T> FromException<T>(Exception e)
         {
             ThrowHelper.ThrowIfNull(e);
@@ -78,8 +82,9 @@
         /// </summary>
         /// <param name="error">The exception representing error. Cannot be <see langword="null"/>.</param>
         /// <remarks>
-        /// On .NET 6.0, the stacktrace is stored with the exception.
+        /// This method is not inlined, that the stack trace is reliable.
         /// </remarks>
+        [MethodImpl(MethodImplOptions.NoInlining)]
         public Result(Exception error)
         {
             ThrowHelper.ThrowIfNull(error);
@@ -243,5 +248,4 @@
 #endif
         }
     }
-
 }
