@@ -52,7 +52,7 @@
 
             protected set
             {
-                ThrowHelper.ThrowIfNull(value);
+                ThrowHelper.ThrowIfNull(value, nameof(Name));
                 if (m_Name is not null) throw new InvalidOperationException("Name is read only");
                 m_Name = value;
             }
