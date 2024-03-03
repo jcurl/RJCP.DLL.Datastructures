@@ -331,6 +331,8 @@ namespace RJCP.Core
         /// other object.
         /// </summary>
         /// <param name="obj">An object to compare with this instance.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="obj"/> is <see langword="null"/>.</exception>
+        /// <exception cref="ArgumentException"><paramref name="obj"/> is not a <see cref="SemVer"/>.</exception>
         /// <returns>
         /// A value that indicates the relative order of the objects being compared. The return value has these
         /// meanings: Value Meaning Less than zero This instance precedes <paramref name="obj"/> in the sort order. Zero
@@ -339,6 +341,7 @@ namespace RJCP.Core
         /// </returns>
         public int CompareTo(object obj)
         {
+            ThrowHelper.ThrowIfNull(obj);
             if (!GetType().IsInstanceOfType(obj)) throw new ArgumentException(Messages.Infra_ObjectTypeNotCompatible);
             SemVer semObj = obj as SemVer;
             return CompareTo(semObj);
