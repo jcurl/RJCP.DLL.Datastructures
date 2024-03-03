@@ -7,6 +7,19 @@
     [TestFixture]
     public class ResultTest
     {
+        private static bool HasStackFrame(string stackTrace, string fragment, bool first = true)
+        {
+            Console.WriteLine("{0}", stackTrace);
+            string[] stackframes = stackTrace.Split('\n');
+            if (first)
+                return stackframes[0].Contains(fragment);
+
+            foreach (string frame in stackframes) {
+                if (frame.Contains(fragment)) return true;
+            }
+            return false;
+        }
+
         private static Result<int> ParseSuccess()
         {
             return 42;
@@ -18,6 +31,30 @@
         private static Result<int> ParseError()
         {
             return Result.FromException<int>(new ArgumentException("Test argument error"));
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static Result<int> ParseRaisedError()
+        {
+            try {
+                int v = -1;
+                ThrowHelper.ThrowIfNegative(v);
+            } catch (Exception ex) {
+                return Result.FromException<int>(ex);
+            }
+            return 42;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static Result<int> ParseRaisedErrorCtor()
+        {
+            try {
+                int v = -1;
+                ThrowHelper.ThrowIfNegative(v);
+            } catch (Exception ex) {
+                return new Result<int>(ex);
+            }
+            return 42;
         }
 
         [Test]
@@ -67,11 +104,7 @@
             var result = ParseError();
             Assert.That(result.Error, Is.TypeOf<ArgumentException>());
             Assert.That(result.Error.StackTrace, Is.Not.Null);
-
-            Console.WriteLine("{0}", result.Error.StackTrace);
-            string[] stack = result.Error.StackTrace.Split('\n');
-            Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
-
+            Assert.That(HasStackFrame(result.Error.StackTrace, "RJCP.Core.ResultTest.ParseError"), Is.True);
             Assert.That(result.HasValue, Is.False);
         }
 
@@ -116,10 +149,7 @@
 
             Assert.That(captured, Is.Not.Null);
             Assert.That(captured, Is.TypeOf<ArgumentException>());
-
-            Console.WriteLine("{0}", result.Error.StackTrace);
-            string[] stack = captured.StackTrace.Split('\n');
-            Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
+            Assert.That(HasStackFrame(result.Error.StackTrace, "RJCP.Core.ResultTest.ParseError"), Is.True);
         }
 
         [Test]
@@ -135,10 +165,7 @@
 
             Assert.That(captured, Is.Not.Null);
             Assert.That(captured, Is.TypeOf<ArgumentException>());
-
-            Console.WriteLine("{0}", result.Error.StackTrace);
-            string[] stack = captured.StackTrace.Split('\n');
-            Assert.That(stack[0], Does.Contain("RJCP.Core.ResultTest.ParseError"));
+            Assert.That(HasStackFrame(result.Error.StackTrace, "RJCP.Core.ResultTest.ParseError"), Is.True);
         }
 
         [Test]
@@ -190,6 +217,26 @@
             Assert.That(r2 & r1, Is.False);
             Assert.That(r2 & r3, Is.False);
             Assert.That(r3 & r2, Is.False);
+        }
+
+        [Test]
+        public void RaisedException()
+        {
+            var result = ParseRaisedError();
+            Assert.That(result.Error, Is.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(result.Error.StackTrace, Is.Not.Null);
+            Assert.That(HasStackFrame(result.Error.StackTrace, "RJCP.Core.ResultTest.ParseRaisedError", false), Is.True);
+            Assert.That(result.HasValue, Is.False);
+        }
+
+        [Test]
+        public void RaisedExceptionCtor()
+        {
+            var result = ParseRaisedErrorCtor();
+            Assert.That(result.Error, Is.TypeOf<ArgumentOutOfRangeException>());
+            Assert.That(result.Error.StackTrace, Is.Not.Null);
+            Assert.That(HasStackFrame(result.Error.StackTrace, "RJCP.Core.ResultTest.ParseRaisedError", false), Is.True);
+            Assert.That(result.HasValue, Is.False);
         }
     }
 }

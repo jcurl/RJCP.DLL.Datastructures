@@ -37,8 +37,11 @@
         public static Result<T> FromException<T>(Exception e)
         {
             ThrowHelper.ThrowIfNull(e);
-            StackTrace stack = new(1, true);
-            return new Result<T>(e, stack);
+            if (e.StackTrace is null) {
+                StackTrace stack = new(1, true);
+                return new Result<T>(e, stack);
+            }
+            return new Result<T>(e, null);
         }
 
         /// <summary>
@@ -89,13 +92,25 @@
         {
             ThrowHelper.ThrowIfNull(error);
 #if NET6_0_OR_GREATER
-            m_Exception = ExceptionDispatchInfo.Capture(ExceptionDispatchInfo.SetCurrentStackTrace(error));
+            if (error.StackTrace is not null) {
+                m_Exception = ExceptionDispatchInfo.Capture(error);
+            } else {
+                m_Exception = ExceptionDispatchInfo.Capture(ExceptionDispatchInfo.SetCurrentStackTrace(error));
+            }
 #elif NET45_OR_GREATER
-            StackTrace stack = new(1, true);
-            m_Exception = ExceptionDispatchInfo.Capture(ExceptionExtensions.SetStackTrace(error, stack));
+            if (error.StackTrace is not null) {
+                m_Exception = ExceptionDispatchInfo.Capture(error);
+            } else {
+                StackTrace stack = new(1, true);
+                m_Exception = ExceptionDispatchInfo.Capture(ExceptionExtensions.SetStackTrace(error, stack));
+            }
 #else
-            StackTrace stack = new(1, true);
-            m_Exception = ExceptionExtensions.SetStackTrace(error, stack);
+            if (error.StackTrace is not null) {
+                m_Exception = error;
+            } else {
+                StackTrace stack = new(1, true);
+                m_Exception = ExceptionExtensions.SetStackTrace(error, stack);
+            }
 #endif
             m_Value = default;
         }
@@ -103,11 +118,23 @@
         internal Result(Exception error, StackTrace stack)
         {
 #if NET6_0_OR_GREATER
-            m_Exception = ExceptionDispatchInfo.Capture(ExceptionDispatchInfo.SetRemoteStackTrace(error, stack.ToString()));
+            if (stack is null || error.StackTrace is not null) {
+                m_Exception = ExceptionDispatchInfo.Capture(error);
+            } else {
+                m_Exception = ExceptionDispatchInfo.Capture(ExceptionDispatchInfo.SetRemoteStackTrace(error, stack.ToString()));
+            }
 #elif NET45_OR_GREATER
-            m_Exception = ExceptionDispatchInfo.Capture(ExceptionExtensions.SetStackTrace(error, stack));
+            if (stack is null || error.StackTrace is not null) {
+                m_Exception = ExceptionDispatchInfo.Capture(error);
+            } else {
+                m_Exception = ExceptionDispatchInfo.Capture(ExceptionExtensions.SetStackTrace(error, stack));
+            }
 #else
-            m_Exception = ExceptionExtensions.SetStackTrace(error, stack);
+            if (stack is null || error.StackTrace is not null) {
+                m_Exception = error;
+            } else {
+                m_Exception = ExceptionExtensions.SetStackTrace(error, stack);
+            }
 #endif
             m_Value = default;
         }
